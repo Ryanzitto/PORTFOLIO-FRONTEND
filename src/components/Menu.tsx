@@ -1,4 +1,5 @@
-export const Menu = (props) => {
+import React from "react";
+export const Menu = (props: any) => {
   const { onSectionChange, menuOpened, setMenuOpened } = props;
 
   return (

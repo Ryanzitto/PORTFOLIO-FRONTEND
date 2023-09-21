@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 
 const CURSOR_SPEED = 0.08;
@@ -18,7 +19,10 @@ export const Cursor = () => {
     outlineX = outlineX + distX * CURSOR_SPEED;
     outlineY = outlineY + distY * CURSOR_SPEED;
 
+    //@ts-ignore
     cursorOutline.current.style.left = `${outlineX}px`;
+
+    //@ts-ignore
     cursorOutline.current.style.top = `${outlineY}px`;
     requestAnimationFrame(animate);
   };
@@ -33,6 +37,7 @@ export const Cursor = () => {
     );
     const animateEvent = requestAnimationFrame(animate);
     return () => {
+      //@ts-ignore
       document.removeEventListener("mousemove", mouseEventsListener);
       cancelAnimationFrame(animateEvent);
     };
@@ -43,11 +48,17 @@ export const Cursor = () => {
       "mouseover",
       function (e) {
         if (
+          //@ts-ignore
           e.target.tagName.toLowerCase() === "button" ||
           // check parent is button
+
+          //@ts-ignore
           e.target.parentElement.tagName.toLowerCase() === "button" ||
           // check is input or textarea
+
+          //@ts-ignore
           e.target.tagName.toLowerCase() === "input" ||
+          //@ts-ignore
           e.target.tagName.toLowerCase() === "textarea"
         ) {
           setHoverButton(true);
@@ -57,6 +68,7 @@ export const Cursor = () => {
       }
     );
     return () => {
+      //@ts-ignore
       document.removeEventListener("mouseover", mouseEventListener);
     };
   }, []);
@@ -70,6 +82,7 @@ export const Cursor = () => {
             ? "bg-transparent border-2 border-indigo-900 w-5 h-5"
             : "bg-indigo-500 w-3 h-3"
         }`}
+        //@ts-ignore
         ref={cursorOutline}
       ></div>
     </>

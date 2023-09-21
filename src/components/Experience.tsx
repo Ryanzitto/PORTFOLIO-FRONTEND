@@ -9,43 +9,41 @@ import { motion } from "framer-motion-3d";
 import { useEffect } from "react";
 import { framerMotionConfig } from "../config";
 import { Avatar } from "./Avatar";
-import { Office } from "./Office";
+import React from "react";
 
-export const Experience = (props) => {
+export const Experience = (props: any) => {
   const { section, menuOpened } = props;
   const { viewport } = useThree();
 
+  //@ts-ignore
   const cameraPositionX = useMotionValue();
+
+  //@ts-ignore
   const cameraLookAtX = useMotionValue();
 
   useEffect(() => {
+    //@ts-ignore
     animate(cameraPositionX, menuOpened ? -5 : 0, {
       ...framerMotionConfig,
     });
+
+    //@ts-ignore
     animate(cameraLookAtX, menuOpened ? 5 : 0, {
       ...framerMotionConfig,
     });
   }, [menuOpened]);
 
   useFrame((state) => {
+    //@ts-ignore
     state.camera.position.x = cameraPositionX.get();
+
+    //@ts-ignore
     state.camera.lookAt(cameraLookAtX.get(), 0, 0);
   });
 
   return (
     <>
       <ambientLight intensity={1} />
-      <motion.group
-        position={[1.5, 2, 3]}
-        scale={[0.9, 0.9, 0.9]}
-        rotation-y={-Math.PI / 4}
-        animate={{
-          y: section === 0 ? 0 : -1,
-        }}
-      >
-        <Office section={section} />
-      </motion.group>
-
       {/* SKILLS */}
       <motion.group
         position={[0, -1.5, -10]}
