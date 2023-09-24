@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
+import { useStoreApp } from "../store";
 
 const CURSOR_SPEED = 0.08;
 
@@ -9,7 +10,8 @@ let outlineX = 0;
 let outlineY = 0;
 
 export const Cursor = () => {
-  const cursorOutline = useRef();
+  const { color } = useStoreApp();
+  const cursorOutline = useRef<HTMLDivElement | null>(null);
   const [hoverButton, setHoverButton] = useState(false);
 
   const animate = () => {
@@ -73,6 +75,11 @@ export const Cursor = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (cursorOutline.current) {
+      cursorOutline.current.style.backgroundColor = color;
+    }
+  }, [color]);
   return (
     <>
       <div

@@ -7,7 +7,6 @@ import { useControls } from "leva";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
-import React from "react";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -46,6 +45,10 @@ export function Avatar(props: any) {
   const { nodes, materials } = useGLTF("models/Avatar.glb") as GLTFResult;
 
   const { animations: typingAnimation } = useFBX("animations/Typing.fbx");
+  const { animations: boxeAnimation } = useFBX("animations/Boxe.fbx");
+  const { animations: waveAnimation } = useFBX(
+    "animations/Standing Greeting.fbx"
+  );
   const { animations: standingAnimation } = useFBX(
     "animations/Standing Idle.fbx"
   );
@@ -53,12 +56,20 @@ export function Avatar(props: any) {
     "animations/Falling Idle.fbx"
   );
 
+  boxeAnimation[0].name = "Boxe";
+  waveAnimation[0].name = "Wave";
   typingAnimation[0].name = "Typing";
   standingAnimation[0].name = "Standing";
   fallingAnimation[0].name = "Falling";
 
   const { actions } = useAnimations(
-    [typingAnimation[0], standingAnimation[0], fallingAnimation[0]],
+    [
+      waveAnimation[0],
+      standingAnimation[0],
+      fallingAnimation[0],
+      typingAnimation[0],
+      boxeAnimation[0],
+    ],
     group
   );
 
@@ -77,10 +88,10 @@ export function Avatar(props: any) {
 
   useEffect(() => {
     //@ts-ignore
-    actions[animation].reset().fadeIn(0.5).play();
+    actions[animation]?.reset().fadeIn(0.5).play();
     return () => {
       //@ts-ignore
-      actions[animation].reset().fadeOut(0.5);
+      actions[animation]?.reset().fadeOut(0.5);
     };
   }, [animation]);
 
@@ -91,7 +102,7 @@ export function Avatar(props: any) {
   }, [wireframe]);
 
   return (
-    <group {...props} ref={group} dispose={null}>
+    <group {...props} ref={group} dispose={null} scale={2.5}>
       <group>
         <primitive object={nodes.Hips} />
         <skinnedMesh
