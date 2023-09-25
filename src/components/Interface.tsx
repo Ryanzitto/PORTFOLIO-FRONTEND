@@ -226,7 +226,55 @@ const AboutSection = () => {
                   conceitos aprendidos. possuo habilidades no Frontend e
                   conhecimentos básicos de Backend.
                 </p>
-                <motion.div className="pt-4 lg:pt-12 flex flex-col items-center lg:items-end justify-center gap-4 lg:gap-6 font-extrabold">
+                <p className=" mt-4 w-[80%] min-[1350px]:w-[90%] text-md min-[400px]:text-md  md:text-lg lg:text-right min-[1350px]:text-lg">
+                  Minha stack é baseada no React então uso tecnologias como:
+                  <br />{" "}
+                  <strong className="transition-colors hover:opacity-60">
+                    REACT -
+                  </strong>
+                  <strong className="transition-colors hover:opacity-60">
+                    {" "}
+                    NEXTJS -
+                  </strong>
+                  <strong className="transition-colors hover:opacity-60">
+                    {" "}
+                    TYPESCRIPT -
+                  </strong>{" "}
+                  <strong className="transition-colors hover:opacity-60">
+                    R3F -
+                  </strong>
+                  <strong className="transition-colors hover:opacity-60">
+                    {" "}
+                    REDUX -
+                  </strong>
+                  <strong className="transition-colors hover:opacity-60">
+                    {" "}
+                    ZUSTAND -
+                  </strong>
+                  <br />
+                  <strong className="transition-colors hover:opacity-60">
+                    {" "}
+                    AXIOS -
+                  </strong>{" "}
+                  <strong className="transition-colors hover:opacity-60">
+                    {" "}
+                    TAILWIND -
+                  </strong>
+                  <strong className="transition-colors hover:opacity-60">
+                    {" "}
+                    STYLED-COMPONENTS -
+                  </strong>
+                  <strong className="transition-colors hover:opacity-60">
+                    {" "}
+                    JEST -
+                  </strong>
+                  <strong className="transition-colors hover:opacity-60">
+                    {" "}
+                    RTL{" "}
+                  </strong>{" "}
+                  <br /> e mais algumas outras bibliotecas.
+                </p>
+                {/* <motion.div className="pt-4 lg:pt-12 flex flex-col items-center lg:items-end justify-center gap-4 lg:gap-6 font-extrabold">
                   <motion.button
                     whileHover={{
                       x: 5,
@@ -269,7 +317,7 @@ const AboutSection = () => {
                       <span>432 LIKES</span>
                     </div>
                   </div>
-                </motion.div>
+                </motion.div> */}
               </motion.div>
             </motion.div>
           </div>
@@ -522,6 +570,8 @@ const ContactSection = () => {
       ref.current.style.backgroundColor = color;
     }
   }, [color]);
+
+  const { contentCard, setContentCard } = useStoreApp();
   return (
     <Section>
       <div className="bg-white/10 backdrop-blur-sm w-full h-full flex">
@@ -533,8 +583,8 @@ const ContactSection = () => {
                   <div className="flex justify-center w-full">
                     <div className="relative">
                       <img
-                        src="https://source.unsplash.com/jmURdhtm7Ng/120x120"
-                        className="shadow-xl border-zinc-800 rounded-full align-middle border-8 absolute -m-16 -ml-18 lg:-ml-16 max-w-[150px]"
+                        src="images/perfil.jpeg"
+                        className="shadow-xl border-white rounded-full align-middle border-8 absolute -m-16 -ml-18 lg:-ml-16 max-w-[130px]"
                       />
                     </div>
                   </div>
@@ -543,6 +593,11 @@ const ContactSection = () => {
                   <h3 className="mb-1 text-2xl font-bold leading-normal text-gray-300">
                     Ryan Henrique
                   </h3>
+                  <div className="flex flex-row justify-center items-center w-full mx-auto space-x-2 text-center">
+                    <div className="text-sm font-bold tracking-wide text-gray-300 font-mono text-xl">
+                      Desenvolvedor Front-end
+                    </div>
+                  </div>
                   <div className="flex flex-row justify-center items-center w-full mx-auto space-x-2 text-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -558,7 +613,7 @@ const ContactSection = () => {
                     </svg>
 
                     <div className="text-sm font-bold tracking-wide text-gray-300 font-mono text-xl">
-                      Desenvolvedor Front-end
+                      Ponte-Nova MG
                     </div>
                   </div>
                   <div className="w-full text-center">
@@ -620,16 +675,42 @@ const ContactSection = () => {
                     </div>
                   </div>
                 </div>
-                <div className="pt-6 mx-6 mt-6 text-center border-t border-gray-200 dark:border-gray-700/50">
+                <div className="mx-6 mt-4 text-center border-t border-gray-200 pt-4">
+                  <div className="flex justify-center items-center gap-2">
+                    <div
+                      onClick={() => setContentCard("about")}
+                      className="w-2 h-2 bg-white rounded-full cursor-pointer"
+                    ></div>
+                    <div
+                      onClick={() => setContentCard("techs")}
+                      className="w-2 h-2 bg-white rounded-full cursor-pointer"
+                    ></div>
+                    <div
+                      onClick={() => setContentCard("contact")}
+                      className="w-2 h-2 bg-white rounded-full cursor-pointer"
+                    ></div>
+                  </div>
                   <div className="flex flex-wrap justify-center">
-                    <div className="w-full px-6">
-                      <p className="mb-4 font-light leading-relaxed text-gray-400">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Proin turpis orci, maximus sed purus a, cursus
-                        scelerisque purus. Morbi molestie, odio at sagittis
-                        rhoncus, felis massa iaculis mi, quis molestie erat
-                        ipsum vel risus.
-                      </p>
+                    <div className="w-full px-6 pt-4">
+                      {contentCard === "about" && (
+                        <p className="mb-4 font-light leading-relaxed text-gray-300">
+                          Sou um jovem desenvolvedor muito criativo, interessado
+                          em criar experiências de usuario incríveis,
+                          agradáveis, escaláveis <br />e performáticas. Busco o
+                          crescimento profissional e pessoal.
+                        </p>
+                      )}
+                      {contentCard === "techs" && (
+                        <p className="mb-4 font-light leading-relaxed text-gray-300">
+                          REACT, NEXTJS, TYPESCRIPT, AXIOS, NODEJS, R3F, REDUX,
+                          ZUSTAND, JEST, RTL
+                        </p>
+                      )}
+                      {contentCard === "contact" && (
+                        <p className="mb-4 font-light leading-relaxed text-gray-300">
+                          contact
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
