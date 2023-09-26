@@ -25,8 +25,8 @@ function App() {
           ...framerMotionConfig,
         }}
       >
-        <div className="w-screen h-screen class relative">
-          <div className="bg-zinc-800/80 w-screen h-screen absolute">
+        <div className="w-screen h-screen relative">
+          <div className="bg-slate-100 backdrop-blur-sm w-screen h-screen absolute">
             <Canvas shadows camera={{ position: [0, 3, 10], fov: 42 }}>
               <ScrollControls pages={4} damping={0.1}>
                 <ScrollManager section={section} onSectionChange={setSection} />

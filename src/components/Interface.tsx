@@ -92,23 +92,40 @@ const AboutSection = () => {
 
   const colorRef = useRef<HTMLDivElement | null>(null);
 
+  const techs = [
+    "REACT",
+    "NEXTJS",
+    "TYPESCRIPT",
+    "R3F",
+    "REDUX",
+    "ZUSTAND",
+    "AXIOS",
+    "TAILWIND",
+    "STYLED-COMPONENTS",
+    "JEST",
+    "RTL",
+  ];
+
+  const colorRefTechs = techs.map(() => useRef<HTMLDivElement | null>(null));
+
   useEffect(() => {
     if (colorRef.current) {
       colorRef.current.style.backgroundImage = `linear-gradient(120deg, ${color}, #1b1b1b)`;
       colorRef.current.style.webkitBackgroundClip = "text";
       colorRef.current.style.color = "transparent";
     }
-  }, [color]);
-
-  const like = () => {
-    setLikeIsClicked(!likeIsClicked);
-  };
+    colorRefTechs.forEach((ref) => {
+      if (ref.current) {
+        ref.current.style.color = color;
+      }
+    });
+  }, [color, colorRefTechs]);
 
   return (
     <Section>
       <div className="flex flex-col w-screen h-screen justify-center items-center">
         <div className="flex lg:flex-row flex-col w-full h-full justify-center items-center">
-          <div className="lg:w-1/2 w-full lg:h-full h-1/2 flex justify-center items-center lg:pl-10 text-white">
+          <div className="lg:w-1/2 w-full lg:h-full h-1/2 flex justify-center items-center lg:pl-10 text-zinc-800">
             <motion.div
               data-testid={"div"}
               whileInView={"visible"}
@@ -135,7 +152,7 @@ const AboutSection = () => {
                 }}
                 className=""
               >
-                <div className="flex flex-col justify-center text-sm font-black md:text-xl">
+                <div className="flex flex-col justify-center text-sm font-black md:text-xl font-sofia">
                   <span>👋 OLÁ, EU SOU</span>
                   <span>RYAN HENRIQUE</span>
                 </div>
@@ -172,7 +189,7 @@ const AboutSection = () => {
                     duration: 1,
                     delay: 0,
                   }}
-                  className="flex flex-col lg:gap-4 overflow-auto w-[80%] min-[1350px]:w-[90%] text-md min-[400px]:text-md min-[450px]:mt-4 md:text-lg lg:text-left font-medium min-[1350px]:text-lg"
+                  className="flex font-sofia flex-col lg:gap-4 overflow-auto w-[80%] min-[1350px]:w-[90%] text-md min-[400px]:text-md min-[450px]:mt-4 md:text-lg lg:text-left font-bold min-[1350px]:text-lg"
                 >
                   <p>
                     Sou um jovem desenvolvedor muito criativo, interessado em
@@ -181,7 +198,7 @@ const AboutSection = () => {
                     profissional e pessoal.
                   </p>
                   <p>
-                    possuo habilidade de adaptabilidade, comunicação clara,
+                    Possuo habilidade de adaptabilidade, comunicação clara,
                     <br /> e uma intensa vontade de aprender.
                   </p>
                   <p className="lg:text-left">
@@ -215,65 +232,26 @@ const AboutSection = () => {
                   duration: 1,
                   delay: 0,
                 }}
-                className="text-white font-medium text-center md:text-center text-md flex flex-col items-center gap-6 lg:gap-0 lg:items-end"
+                className="text-zinc-800 font-bold text-center md:text-center text-md flex flex-col items-center gap-6 lg:gap-0 lg:items-end"
               >
                 <p
                   data-testid={"about2"}
-                  className="w-[80%] min-[1350px]:w-[90%] text-md min-[400px]:text-md  md:text-lg lg:text-right min-[1350px]:text-lg"
+                  className="w-[80%] font-sofia min-[1350px]:w-[90%] text-md min-[400px]:text-md  md:text-lg lg:text-right min-[1350px]:text-lg"
                 >
                   Há cerca de 10 meses eu venho me dedicando aos estudos de
                   programação 🧑‍💻, sempre aplicando em projetos pessoais os
                   conceitos aprendidos. possuo habilidades no Frontend e
                   conhecimentos básicos de Backend.
                 </p>
-                <p className=" mt-4 w-[80%] min-[1350px]:w-[90%] text-md min-[400px]:text-md  md:text-lg lg:text-right min-[1350px]:text-lg">
-                  Minha stack é baseada no React então uso tecnologias como:
-                  <br />{" "}
-                  <strong className="transition-colors hover:opacity-60">
-                    REACT -
-                  </strong>
-                  <strong className="transition-colors hover:opacity-60">
-                    {" "}
-                    NEXTJS -
-                  </strong>
-                  <strong className="transition-colors hover:opacity-60">
-                    {" "}
-                    TYPESCRIPT -
-                  </strong>{" "}
-                  <strong className="transition-colors hover:opacity-60">
-                    R3F -
-                  </strong>
-                  <strong className="transition-colors hover:opacity-60">
-                    {" "}
-                    REDUX -
-                  </strong>
-                  <strong className="transition-colors hover:opacity-60">
-                    {" "}
-                    ZUSTAND -
-                  </strong>
-                  <br />
-                  <strong className="transition-colors hover:opacity-60">
-                    {" "}
-                    AXIOS -
-                  </strong>{" "}
-                  <strong className="transition-colors hover:opacity-60">
-                    {" "}
-                    TAILWIND -
-                  </strong>
-                  <strong className="transition-colors hover:opacity-60">
-                    {" "}
-                    STYLED-COMPONENTS -
-                  </strong>
-                  <strong className="transition-colors hover:opacity-60">
-                    {" "}
-                    JEST -
-                  </strong>
-                  <strong className="transition-colors hover:opacity-60">
-                    {" "}
-                    RTL{" "}
-                  </strong>{" "}
-                  <br /> e mais algumas outras bibliotecas.
+                <p className="font-sofia mt-4 w-[80%] min-[1350px]:w-[90%] text-md min-[400px]:text-md  md:text-lg lg:text-right min-[1350px]:text-lg">
+                  Minha Stack é baseada no React então uso tecnologias como:
                 </p>
+                <div className="max-w-[500px] flex justify-center items-center gap-2 flex-wrap break-words font-sofia mt-4 w-[80%] min-[1350px]:w-[90%] text-md min-[400px]:text-md  md:text-lg lg:text-right min-[1350px]:text-lg">
+                  {techs.map((tech, index) => {
+                    return <span ref={colorRefTechs[index]}>{tech}</span>;
+                  })}
+                </div>
+
                 {/* <motion.div className="pt-4 lg:pt-12 flex flex-col items-center lg:items-end justify-center gap-4 lg:gap-6 font-extrabold">
                   <motion.button
                     whileHover={{
@@ -357,7 +335,7 @@ const SkillSection = () => {
 
   return (
     <Section>
-      <div className="h-full flex w-full gap-20 lg:gap-0 flex-col justify-center items-center text-white">
+      <div className="h-full flex w-full gap-20 lg:gap-0 flex-col justify-center items-center text-zinc-800">
         <div className="flex w-full h-full flex-col justify-center items-center">
           <div className="flex flex-col lg:flex-row w-full h-full justify-center items-center gap-10 lg:gap-0">
             <motion.div
@@ -388,7 +366,7 @@ const SkillSection = () => {
                   <div className="w-64" key={index}>
                     <motion.h3
                       onClick={() => handleClick(skill.title)}
-                      className="text-xl font-bold cursor-pointer transition-colors hover:text-white/60"
+                      className="text-xl font-bold cursor-pointer transition-colors hover:text-zinc-800/60"
                       initial={{
                         opacity: 0,
                       }}
@@ -539,7 +517,7 @@ const ProjectsSection = () => {
         }}
         className="flex flex-col w-full h-full justify-center items-center"
       >
-        <div className="w-[95%] flex justify-center items-center text-white text-xl font-extrabold tracking-wider">
+        <div className="w-[95%] flex justify-center items-center text-zinc-800 text-xl font-extrabold tracking-wider">
           <span>PROJETOS</span>
         </div>
         <div className="w-[95%] h-[90%] flex justify-center items-center lg:flex-row flex-col">
@@ -777,7 +755,7 @@ export const Card = (props: any) => {
                   href={linkGithub}
                   data-testid={linkGithub}
                   target="_blank"
-                  className="text-white font-black text-sm tracking-wider "
+                  className="text-zinc-800 font-black text-sm tracking-wider "
                 >
                   GITHUB
                 </a>
@@ -796,7 +774,7 @@ export const Card = (props: any) => {
                   href={linkDeploy}
                   data-testid={linkDeploy}
                   target="_blank"
-                  className="text-white font-black text-xs tracking-wider"
+                  className="text-zinc-800 font-black text-xs tracking-wider"
                 >
                   VER SITE
                 </a>
