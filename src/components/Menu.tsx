@@ -4,12 +4,16 @@ import { useStoreApp } from "../store";
 
 export const Menu = (props: any) => {
   const ref = useRef<HTMLButtonElement | null>(null);
-  const { color, setColor } = useStoreApp();
+  const ref2 = useRef<HTMLButtonElement | null>(null);
+  const { color, setColor, visibility, setVisibility } = useStoreApp();
   const { onSectionChange, menuOpened, setMenuOpened } = props;
 
   useEffect(() => {
     if (ref.current) {
       ref.current.style.backgroundColor = color;
+    }
+    if (ref2.current) {
+      ref2.current.style.backgroundColor = color;
     }
   }, [color]);
 
@@ -35,6 +39,14 @@ export const Menu = (props: any) => {
             menuOpened ? "-rotate-45" : ""
           }`}
         />
+      </button>
+      <button
+        ref={ref2}
+        onClick={() => setVisibility(!visibility)}
+        className="flex lg:hidden z-20 fixed top-12 flex flex-col justify-center items-center right-6 lg:right-12 p-3 w-11 h-11 text-xs rounded-md mt-20 text-white font-black"
+      >
+        <span>3D</span>
+        <span>{visibility === true ? "ON" : "OFF"}</span>
       </button>
       <div
         className={`z-10 fixed top-0 right-0 bottom-0 bg-white transition-all overflow-hidden flex flex-col

@@ -8,6 +8,8 @@ export const useStoreApp = create(
       page: "HOME",
       skillDisplayed: "Threejs / React Three Fiber",
       contentCard: "about",
+      visibility: true,
+      setVisibility: (payload: boolean) => set({ visibility: payload }),
       setContentCard: (payload: string) => set({ contentCard: payload }),
       setSkillDisplayed: (payload: string) => set({ skillDisplayed: payload }),
       setColor: (payload: string) => set({ color: payload }),

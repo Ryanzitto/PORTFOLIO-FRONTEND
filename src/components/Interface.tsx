@@ -125,7 +125,9 @@ const AboutSection = () => {
     <Section>
       <div className="flex flex-col w-screen h-screen justify-center items-center">
         <div className="flex lg:flex-row flex-col w-full h-full justify-center items-center">
-          <div className="lg:w-1/2 w-full lg:h-full h-1/2 flex justify-center items-center lg:pl-10 text-zinc-800">
+          <div
+            className={`lg:w-1/2 w-full lg:h-full h-1/2 flex justify-center items-center lg:pl-10 text-zinc-800`}
+          >
             <motion.div
               data-testid={"div"}
               whileInView={"visible"}
@@ -152,7 +154,7 @@ const AboutSection = () => {
                 }}
                 className=""
               >
-                <div className="flex flex-col justify-center text-sm font-black md:text-xl font-sofia">
+                <div className="flex flex-col justify-center text-sm font-black md:text-xl font-sofia ">
                   <span>👋 OLÁ, EU SOU</span>
                   <span>RYAN HENRIQUE</span>
                 </div>
@@ -189,7 +191,7 @@ const AboutSection = () => {
                     duration: 1,
                     delay: 0,
                   }}
-                  className="flex font-sofia flex-col lg:gap-4 overflow-auto w-[80%] min-[1350px]:w-[90%] text-md min-[400px]:text-md min-[450px]:mt-4 md:text-lg lg:text-left font-bold min-[1350px]:text-lg"
+                  className="backdrop-blur-none flex font-sofia flex-col lg:gap-4 overflow-auto w-[80%] min-[1350px]:w-[90%] text-md min-[400px]:text-md min-[450px]:mt-4 md:text-lg lg:text-left font-bold min-[1350px]:text-lg"
                 >
                   <p>
                     Sou um jovem desenvolvedor muito criativo, interessado em
@@ -246,11 +248,19 @@ const AboutSection = () => {
                 <p className="font-sofia mt-4 w-[80%] min-[1350px]:w-[90%] text-md min-[400px]:text-md  md:text-lg lg:text-right min-[1350px]:text-lg">
                   Minha Stack é baseada no React então uso tecnologias como:
                 </p>
-                <div className="max-w-[500px] flex justify-center items-center gap-2 flex-wrap break-words font-sofia mt-4 w-[80%] min-[1350px]:w-[90%] text-md min-[400px]:text-md  md:text-lg lg:text-right min-[1350px]:text-lg">
+                <div className="max-w-[500px] flex justify-center lg:justify-end items-center gap-2 flex-wrap break-words font-sofia mt-4 w-[80%] min-[1350px]:w-[90%] text-md min-[400px]:text-md  md:text-lg lg:text-right min-[1350px]:text-lg">
                   {techs.map((tech, index) => {
-                    return <span ref={colorRefTechs[index]}>{tech}</span>;
+                    return (
+                      <span
+                        className="font-black hover:opacity-60"
+                        ref={colorRefTechs[index]}
+                      >
+                        {tech}
+                      </span>
+                    );
                   })}
                 </div>
+                <p className="font-sofia mt-4 w-[80%] min-[1350px]:w-[90%] text-md min-[400px]:text-md  md:text-lg lg:text-right min-[1350px]:text-lg"></p>
 
                 {/* <motion.div className="pt-4 lg:pt-12 flex flex-col items-center lg:items-end justify-center gap-4 lg:gap-6 font-extrabold">
                   <motion.button
@@ -357,7 +367,7 @@ const SkillSection = () => {
             >
               <h2
                 data-testid="HABILIDADES"
-                className="font-bold text-2xl md:text-4xl"
+                className="font-black text-2xl md:text-4xl"
               >
                 HABILIDADES
               </h2>
@@ -366,7 +376,7 @@ const SkillSection = () => {
                   <div className="w-64" key={index}>
                     <motion.h3
                       onClick={() => handleClick(skill.title)}
-                      className="text-xl font-bold cursor-pointer transition-colors hover:text-zinc-800/60"
+                      className="text-xl font-sofia font-bold cursor-pointer transition-colors hover:text-zinc-800/60"
                       initial={{
                         opacity: 0,
                       }}
@@ -382,7 +392,7 @@ const SkillSection = () => {
                     >
                       {skill.title}
                     </motion.h3>
-                    <div className="h-2 w-full bg-gray-200 rounded-full mt-2 flex justify-start">
+                    <div className="h-2 w-full bg-gray-300 rounded-full mt-2 flex justify-start">
                       <motion.div
                         className="h-full rounded-full"
                         ref={colorRefsSkills[index]}
@@ -421,9 +431,11 @@ const SkillSection = () => {
                             },
                           },
                         }}
-                        className="p-4 w-full bg-white/10 backdrop-blur-sm mt-4 rounded-md border border-slate-300/30"
+                        className="p-4 w-full bg-zinc-700 backdrop-blur-sm mt-4 rounded-md border border-slate-600"
                       >
-                        <p className="text-xs font-bold">{skill.desc}</p>
+                        <p className="text-xs font-bold font-sofia text-white/90">
+                          {skill.desc}
+                        </p>
                       </motion.div>
                     )}
                   </div>
@@ -446,8 +458,8 @@ const SkillSection = () => {
               }}
               className="w-1/2 flex flex-col justify-center items-center"
             >
-              <h2 className="text-2xl font-bold md:text-4xl">LÍNGUAS</h2>
-              <div className=" mt-8 space-y-4">
+              <h2 className="text-2xl font-black md:text-4xl">LÍNGUAS</h2>
+              <div className=" mt-8 space-y-4 font-sofia">
                 {languages.map((lng, index) => (
                   <div className="w-64" key={index}>
                     <motion.h3
@@ -467,7 +479,7 @@ const SkillSection = () => {
                     >
                       {lng.title}
                     </motion.h3>
-                    <div className="h-2 w-full bg-gray-200 rounded-full mt-2">
+                    <div className="h-2 w-full bg-gray-300 rounded-full mt-2">
                       <motion.div
                         ref={colorRefsLangs[index]}
                         className="h-full rounded-full "
@@ -803,8 +815,8 @@ export const Interface = () => {
     <div className="flex flex-col items-center w-screen">
       <AboutSection />
       <SkillSection />
-      <ProjectsSection />
-      <ContactSection />
+      {/* <ProjectsSection /> */}
+      {/* <ContactSection /> */}
     </div>
   );
 };

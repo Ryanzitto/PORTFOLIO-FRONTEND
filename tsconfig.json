@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "__tests__/Interface.spec.jsx"],
+  "include": ["src", "__tests__/Interface.spec.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

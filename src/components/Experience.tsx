@@ -5,8 +5,9 @@ import { useEffect } from "react";
 import { framerMotionConfig } from "../config";
 import { Avatar } from "./Avatar";
 import { ContactShadows } from "@react-three/drei";
-import { Room } from "./Scene";
+import { useStoreApp } from "../store";
 export const Experience = (props: any) => {
+  const { visibility } = useStoreApp();
   const { section, menuOpened } = props;
   const { viewport } = useThree();
 
@@ -53,7 +54,9 @@ export const Experience = (props: any) => {
           color="#000000"
         />
         <motion.group rotation-y={6.35}>
-          <Avatar animation={section === 0 ? "Wave" : "Boxe"} />
+          {visibility === true ? (
+            <Avatar animation={section === 0 ? "Wave" : "Boxe"} />
+          ) : null}
         </motion.group>
       </motion.group>
     </>
