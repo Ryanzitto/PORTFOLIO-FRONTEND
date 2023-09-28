@@ -51,12 +51,39 @@ const projetos = [
     name: "IDK GAME",
   },
   {
+    url: "images/projeto1.png",
+    desc: "Este projeto se trata de um jogo criado com o ecosistema ThreeJS, o objetivo é coletar as moedas e acumular pontos enquanto se desvia dos obstáculos que te jogam pra fora da plataforma!",
+    linkGithub: "https://github.com/Ryanzitto/THREE-IDK",
+    linkDeploy: "https://ryanzitto.github.io/THREE-IDK/",
+    techs: "THREEJS - R3F - REACT - TAILWIND - ZUSTAND - TYPESCRIPT - JEST",
+    id: 1,
+    name: "IDK GAME",
+  },
+  {
     url: "images/projeto2.png",
     desc: "Este projeto se trata um site feito para fãs de rick and morty para revisitar conteúdos relacionados a série, podendo-se obter informações relacionada a personagens, locais, e epsódios.",
     linkGithub: "https://github.com/Ryanzitto/Rickandmorty",
     linkDeploy: "https://rickandmorty-7gm6b9xrx-ryanzitto.vercel.app/",
     techs: "REACT - NEXTJS - TAILWIND - REDUX - TYPESCRIPT - JEST",
-    id: 1,
+    id: 2,
+    name: "R-AND-M",
+  },
+  {
+    url: "images/projeto2.png",
+    desc: "Este projeto se trata um site feito para fãs de rick and morty para revisitar conteúdos relacionados a série, podendo-se obter informações relacionada a personagens, locais, e epsódios.",
+    linkGithub: "https://github.com/Ryanzitto/Rickandmorty",
+    linkDeploy: "https://rickandmorty-7gm6b9xrx-ryanzitto.vercel.app/",
+    techs: "REACT - NEXTJS - TAILWIND - REDUX - TYPESCRIPT - JEST",
+    id: 3,
+    name: "R-AND-M",
+  },
+  {
+    url: "images/projeto2.png",
+    desc: "Este projeto se trata um site feito para fãs de rick and morty para revisitar conteúdos relacionados a série, podendo-se obter informações relacionada a personagens, locais, e epsódios.",
+    linkGithub: "https://github.com/Ryanzitto/Rickandmorty",
+    linkDeploy: "https://rickandmorty-7gm6b9xrx-ryanzitto.vercel.app/",
+    techs: "REACT - NEXTJS - TAILWIND - REDUX - TYPESCRIPT - JEST",
+    id: 4,
     name: "R-AND-M",
   },
 ];
@@ -485,7 +512,7 @@ const ProjectsSection = () => {
         <div className="w-full h-16 flex justify-center items-center text-zinc-800 text-2xl font-black font-sofia">
           <span>PROJETOS</span>
         </div>
-        <div className="h-full w-full flex-col justify-center item-center flex flex-wrap p-8 justify-center items-center gap-6">
+        <div className="h-full w-full flex justify-center items-center flex p-8 gap-6 flex-wrap overflow-y-auto lg:overflow-hidden">
           {projetos.map((projeto) => {
             return (
               <Card
@@ -506,7 +533,10 @@ const ProjectsSection = () => {
 const ContactSection = () => {
   const { color } = useStoreApp();
 
-  const ref = useRef<HTMLButtonElement | null>(null);
+  const ref1 = useRef<HTMLHeadingElement | null>(null);
+  const ref2 = useRef<HTMLHeadingElement | null>(null);
+  const ref3 = useRef<HTMLHeadingElement | null>(null);
+  const ref4 = useRef<HTMLHeadingElement | null>(null);
 
   const [hovered, setHovered] = useState<boolean>(false);
 
@@ -516,19 +546,105 @@ const ContactSection = () => {
   };
 
   useEffect(() => {
-    if (ref.current && hovered === true) {
-      ref.current.style.backgroundColor = color;
+    if (ref1.current) {
+      ref1.current.style.color = color;
     }
-    if (ref.current && hovered === false) {
-      ref.current.style.backgroundColor = "#27272A";
+    if (ref2.current) {
+      ref2.current.style.color = color;
     }
-  }, [hovered]);
+    if (ref3.current) {
+      ref3.current.style.color = color;
+    }
+    if (ref4.current) {
+      ref4.current.style.color = color;
+    }
+  }, [color, hovered]);
 
+  const tela = window.innerWidth;
   return (
     <Section>
-      <div className="flex w-full h-screen">
-        <div className="w-1/2 h-full"></div>
-        <div className="w-1/2 h-full flex flex-col p-8 flex justify-center items-center gap-3">
+      <div className="flex flex-col-reverse lg:flex-row w-full h-screen">
+        <div className="w-full h-1/2 lg:w-1/2 lg:h-full flex justify-center items-end relative">
+          <img
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            src="images/foto.png"
+            className="grayscale w-[400px] lg:w-[600px] absolute z-10"
+          />
+          <div className="absolute w-full h-full flex flex-col justify-center items-center">
+            <AnimatePresence>
+              {hovered === true && (
+                <div className="flex flex-col text-left">
+                  <motion.h1
+                    ref={ref1}
+                    initial={{ x: 0, opacity: 0 }}
+                    animate={{ x: tela > 1024 ? 250 : 150, opacity: 1 }}
+                    exit={{ x: 0, opacity: 0 }}
+                    transition={{
+                      duration: 1,
+                      delay: 0,
+                    }}
+                    className="text-emerald-500 font-black text-2xl lg:text-5xl"
+                  >
+                    RYAN
+                  </motion.h1>
+                  <motion.h1
+                    ref={ref2}
+                    initial={{ x: 0, opacity: 0 }}
+                    animate={{ x: tela > 1024 ? 250 : 150, opacity: 1 }}
+                    exit={{ x: 0, opacity: 0 }}
+                    transition={{
+                      duration: 1,
+                      delay: 0,
+                    }}
+                    className="text-emerald-500 font-black text-2xl lg:text-5xl"
+                  >
+                    HENRIQUE
+                  </motion.h1>
+                </div>
+              )}
+            </AnimatePresence>
+            <AnimatePresence>
+              {hovered === true && (
+                <div className="flex flex-col text-right mt-10">
+                  <motion.h1
+                    ref={ref3}
+                    initial={{ x: 0, opacity: 0 }}
+                    animate={{ x: tela > 1024 ? 310 : 200, opacity: 1 }}
+                    exit={{ x: 0, opacity: 0 }}
+                    transition={{
+                      duration: 1,
+                      delay: 0,
+                    }}
+                    className="text-emerald-500 font-black text-2xl lg:text-4xl"
+                  >
+                    FRONT-END
+                  </motion.h1>
+                </div>
+              )}
+            </AnimatePresence>
+            <AnimatePresence>
+              {hovered === true && (
+                <div className="flex flex-col text-left mt-10">
+                  <motion.h1
+                    ref={ref4}
+                    initial={{ x: 0, opacity: 0 }}
+                    animate={{ x: tela > 1024 ? 290 : 190, opacity: 1 }}
+                    exit={{ x: 0, opacity: 0 }}
+                    transition={{
+                      duration: 1,
+                      delay: 0,
+                    }}
+                    className="text-emerald-500 font-black text-2xl lg:text-4xl"
+                  >
+                    REACT
+                  </motion.h1>
+                </div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+        <div className="w-full h-1/2 lg:w-1/2 lg:h-full flex flex-col p-8 flex justify-center items-center gap-3">
           <p className="font-sofia font-bold text-zinc-800 text-xl mt-10">
             Deseja em entrar em contato comigo?
           </p>
