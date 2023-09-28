@@ -59,7 +59,7 @@ export const Menu = (props: any) => {
           <MenuButton label="CONTATO" onClick={() => onSectionChange(3)} />
           <div className="flex flex-col w-full justify-start items-center">
             <span className="text-sm font-bold text-zinc-800/80 hover:opacity-60">
-              SELECIONE UMA COR PRIMÁRIA:
+              COR PRIMÁRIA:
             </span>
             <input
               data-testid={"input-color"}
