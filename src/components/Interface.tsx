@@ -47,15 +47,6 @@ const projetos = [
     linkGithub: "https://github.com/Ryanzitto/THREE-IDK",
     linkDeploy: "https://ryanzitto.github.io/THREE-IDK/",
     techs: "THREEJS - R3F - REACT - TAILWIND - ZUSTAND - TYPESCRIPT - JEST",
-    id: 0,
-    name: "IDK GAME",
-  },
-  {
-    url: "images/projeto1.png",
-    desc: "Este projeto se trata de um jogo criado com o ecosistema ThreeJS, o objetivo é coletar as moedas e acumular pontos enquanto se desvia dos obstáculos que te jogam pra fora da plataforma!",
-    linkGithub: "https://github.com/Ryanzitto/THREE-IDK",
-    linkDeploy: "https://ryanzitto.github.io/THREE-IDK/",
-    techs: "THREEJS - R3F - REACT - TAILWIND - ZUSTAND - TYPESCRIPT - JEST",
     id: 1,
     name: "IDK GAME",
   },
@@ -66,24 +57,6 @@ const projetos = [
     linkDeploy: "https://rickandmorty-7gm6b9xrx-ryanzitto.vercel.app/",
     techs: "REACT - NEXTJS - TAILWIND - REDUX - TYPESCRIPT - JEST",
     id: 2,
-    name: "R-AND-M",
-  },
-  {
-    url: "images/projeto2.png",
-    desc: "Este projeto se trata um site feito para fãs de rick and morty para revisitar conteúdos relacionados a série, podendo-se obter informações relacionada a personagens, locais, e epsódios.",
-    linkGithub: "https://github.com/Ryanzitto/Rickandmorty",
-    linkDeploy: "https://rickandmorty-7gm6b9xrx-ryanzitto.vercel.app/",
-    techs: "REACT - NEXTJS - TAILWIND - REDUX - TYPESCRIPT - JEST",
-    id: 3,
-    name: "R-AND-M",
-  },
-  {
-    url: "images/projeto2.png",
-    desc: "Este projeto se trata um site feito para fãs de rick and morty para revisitar conteúdos relacionados a série, podendo-se obter informações relacionada a personagens, locais, e epsódios.",
-    linkGithub: "https://github.com/Ryanzitto/Rickandmorty",
-    linkDeploy: "https://rickandmorty-7gm6b9xrx-ryanzitto.vercel.app/",
-    techs: "REACT - NEXTJS - TAILWIND - REDUX - TYPESCRIPT - JEST",
-    id: 4,
     name: "R-AND-M",
   },
 ];
@@ -392,32 +365,36 @@ const SkillSection = () => {
                         }}
                       />
                     </div>
-                    {skillDisplayed === skill.title && (
-                      <motion.div
-                        whileInView={"visible"}
-                        initial={{
-                          opacity: 0,
-                          y: 50,
-                          scale: 0.9,
-                        }}
-                        variants={{
-                          visible: {
+
+                    <AnimatePresence>
+                      {skillDisplayed === skill.title && (
+                        <motion.div
+                          initial={{
+                            opacity: 0,
+                            y: 50,
+                            scale: 0.8,
+                          }}
+                          animate={{
                             opacity: 1,
                             y: 0,
                             scale: 1,
-                            transition: {
-                              duration: 0.2,
-                              delay: 0,
-                            },
-                          },
-                        }}
-                        className="p-4 w-full bg-zinc-700 backdrop-blur-sm mt-4 rounded-md border border-slate-600"
-                      >
-                        <p className="text-xs font-bold font-sofia text-white/90">
-                          {skill.desc}
-                        </p>
-                      </motion.div>
-                    )}
+                          }}
+                          exit={{
+                            opacity: 0,
+                            scale: 0.8,
+                          }}
+                          transition={{
+                            duration: 0.2,
+                            delay: 0,
+                          }}
+                          className="p-4 w-full bg-zinc-700 backdrop-blur-sm mt-4 rounded-md border border-slate-600"
+                        >
+                          <p className="text-xs font-bold font-sofia text-white/90">
+                            {skill.desc}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 ))}
               </div>
@@ -510,9 +487,9 @@ const ProjectsSection = () => {
         className="flex flex-col w-full h-full justify-center items-center"
       >
         <div className="w-full h-16 flex justify-center items-center text-zinc-800 text-2xl font-black font-sofia">
-          <span>PROJETOS</span>
+          <span data-testid="projetos">PROJETOS</span>
         </div>
-        <div className="h-full w-full flex justify-center items-center flex p-8 gap-6 flex-wrap overflow-y-auto lg:overflow-hidden">
+        <div className="h-full w-[80%] flex justify-center items-center flex p-8 gap-6 flex-wrap overflow-y-auto lg:overflow-hidden">
           {projetos.map((projeto) => {
             return (
               <Card
@@ -521,6 +498,7 @@ const ProjectsSection = () => {
                 linkDeploy={projeto.linkDeploy}
                 url={projeto.url}
                 desc={projeto.desc}
+                name={projeto.name}
               />
             );
           })}
@@ -565,19 +543,31 @@ const ContactSection = () => {
     <Section>
       <div className="flex flex-col-reverse lg:flex-row w-full h-screen">
         <div className="w-full h-1/2 lg:w-1/2 lg:h-full flex justify-center items-end relative">
-          <img
+          <motion.img
+            initial={{
+              opacity: 0,
+              x: -100,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+              transition: {
+                duration: 1,
+                delay: 0.6,
+              },
+            }}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             src="images/foto.png"
             className="grayscale w-[400px] lg:w-[600px] absolute z-10"
           />
-          <div className="absolute w-full h-full flex flex-col justify-center items-center">
+          <div className="absolute w-full h-full flex flex-col justify-center items-center pt-10 xl:pt-0">
             <AnimatePresence>
               {hovered === true && (
                 <motion.svg
                   initial={{ x: 0, opacity: 0 }}
                   animate={{
-                    x: tela > 1024 ? 160 : 100,
+                    x: tela > 1024 ? 160 : 120,
                     opacity: 1,
                     rotate: 370,
                   }}
@@ -604,7 +594,7 @@ const ContactSection = () => {
                 <motion.svg
                   initial={{ x: 0, opacity: 0 }}
                   animate={{
-                    x: tela > 1024 ? -90 : -100,
+                    x: tela > 1024 ? -90 : -80,
                     opacity: 1,
                     rotate: 360,
                   }}
@@ -630,7 +620,7 @@ const ContactSection = () => {
               {hovered === true && (
                 <motion.svg
                   animate={{
-                    x: tela > 1024 ? 230 : 100,
+                    x: tela > 1024 ? 230 : 180,
                     opacity: 1,
                     rotate: 370,
                   }}
@@ -692,7 +682,7 @@ const ContactSection = () => {
               {hovered === true && (
                 <motion.svg
                   animate={{
-                    x: tela > 1024 ? 250 : -100,
+                    x: tela > 1024 ? 250 : 180,
                     opacity: 1,
                     rotate: 350,
                   }}
@@ -716,14 +706,14 @@ const ContactSection = () => {
               )}
             </AnimatePresence>
           </div>
-          <div className="absolute w-full h-full flex flex-col justify-center items-center">
+          <div className="absolute w-full h-full flex flex-col justify-center items-center pt-10 xl:pt-0">
             <AnimatePresence>
               {hovered === true && (
                 <motion.svg
                   className="w-8 h-8"
                   initial={{ x: 0, opacity: 0 }}
                   animate={{
-                    x: tela > 1024 ? 150 : -100,
+                    x: tela > 1024 ? 150 : 150,
                     y: -50,
                     opacity: 1,
                     rotate: 360,
@@ -781,13 +771,31 @@ const ContactSection = () => {
           <p className="font-sofia font-bold text-zinc-800 text-xl mt-10">
             Deseja em entrar em contato comigo?
           </p>
-          <Button text={"ME MANDE MENSAGEM"} url={"images/whatsapp.png"} />
-          <Button text={"ME MANDE UM EMAIL"} url={"images/o-email.png"} />
+          <div className="flex gap-4">
+            <Button
+              text={"ryanhardflip@gmail.com"}
+              url={"images/o-email.png"}
+            />
+            <ButtonCopy value={"ryanhardflip@gmail.com"} />
+          </div>
+          <div className="flex gap-4">
+            <Button text={"(31) 9 8109-8735"} url={"images/whatsapp.png"} />
+            <ButtonCopy value={"(31) 9 8109-8735"} />
+          </div>
+
           <p className="font-sofia font-bold text-zinc-800 text-xl mt-10">
             Quer ver mais?
           </p>
-          <Button text={"VER MEU LINKEDIN"} url={"images/linkedin.png"} />
-          <Button text={"VER MEU GITHUB"} url={"images/github.png"} />
+          <Button
+            text={"VER MEU LINKEDIN"}
+            url={"images/linkedin.png"}
+            link="https://www.linkedin.com/in/ryan-henrique-1b4075233/"
+          />
+          <Button
+            text={"VER MEU GITHUB"}
+            url={"images/github.png"}
+            link="https://github.com/Ryanzitto"
+          />
 
           <div className="mt-10 flex gap-2 justify-center items-center">
             <p className="font-sofia font-bold text-zinc-800 text-xl ">
@@ -809,14 +817,12 @@ const ContactSection = () => {
   );
 };
 
-export const Button = (props: any) => {
+const Button = (props: any) => {
   const { color } = useStoreApp();
 
   const ref = useRef<HTMLButtonElement | null>(null);
 
   const [hovered, setHovered] = useState<boolean>(false);
-
-  const [likeIsClicked, setLikeIsClicked] = useState<boolean>(false);
 
   useEffect(() => {
     if (ref.current && hovered === true) {
@@ -827,7 +833,7 @@ export const Button = (props: any) => {
     }
   }, [hovered]);
 
-  const { text, url } = props;
+  const { text, url, link } = props;
   return (
     <motion.button
       onMouseEnter={() => setHovered(true)}
@@ -836,21 +842,76 @@ export const Button = (props: any) => {
       initial={{ y: 0 }}
       whileHover={{ y: -5 }}
       className="transition-colors bg-zinc-800 font-bold p-2 rounded-md text-white flex gap-2 justify-center items-center"
+      value={text}
     >
       <img className="w-5" src={url} />
-      {text}
+      <a href={link} target="_blank">
+        {text}
+      </a>
+    </motion.button>
+  );
+};
+const ButtonCopy = (props: any) => {
+  const { color } = useStoreApp();
+
+  const ref = useRef<HTMLButtonElement | null>(null);
+
+  const [hovered, setHovered] = useState<boolean>(false);
+
+  const [click, setClick] = useState<boolean>(false);
+
+  const copy = (value: string) => {
+    navigator.clipboard.writeText(value);
+
+    setClick(true);
+    const interval = setTimeout(() => {
+      setClick(false);
+    }, 3000);
+
+    return () => clearTimeout(interval);
+  };
+
+  useEffect(() => {
+    if (ref.current && hovered === true) {
+      ref.current.style.backgroundColor = color;
+    }
+    if (ref.current && hovered === false) {
+      ref.current.style.backgroundColor = "#27272A";
+    }
+  }, [hovered]);
+
+  const { value } = props;
+  return (
+    <motion.button
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      ref={ref}
+      initial={{ y: 0 }}
+      whileHover={{ y: -5 }}
+      className="relative transition-colors bg-zinc-800 font-bold p-2 rounded-md text-white flex gap-2 justify-center items-center"
+      onClick={() => copy(value)}
+    >
+      <img src="images/interface.png" className="w-6 h-6" />
+      {click === true && (
+        <div className="absolute w-full flex justify-center items-center ml-40">
+          <div className="border border-zinc-300 bg-white p-2 rounded-sm w-fit text-zinc-800">
+            <span className="font-light">Copiado!</span>
+          </div>
+        </div>
+      )}
     </motion.button>
   );
 };
 
 export const Card = (props: any) => {
-  const { linkGithub, linkDeploy, desc, url } = props;
+  const { linkGithub, linkDeploy, desc, url, name } = props;
   const [hovered, setHovered] = useState<boolean>(false);
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="w-fit h-fit flex justify-center items-center relative rounded-md"
+      className="w-fit h-fit flex justify-center items-center relative rounded-md pb-[1px]"
+      data-testid={name}
     >
       <img
         src={url}
@@ -875,7 +936,7 @@ export const Card = (props: any) => {
                 }}
                 className="bg-zinc-800 font-bold p-2 text-white rounded-md flex justify-center items-center text-xs tracking-wider"
               >
-                <a href={linkGithub} target="blank">
+                <a href={linkGithub} target="_blank">
                   GITHUB
                 </a>
               </motion.button>
@@ -886,7 +947,7 @@ export const Card = (props: any) => {
                 }}
                 className="bg-zinc-800 font-bold p-2 text-white rounded-md flex justify-center items-center text-xs tracking-wider"
               >
-                <a href={linkDeploy} target="blank">
+                <a href={linkDeploy} target="_blank">
                   VER SITE
                 </a>
               </motion.button>
@@ -899,13 +960,29 @@ export const Card = (props: any) => {
               animate={{ y: 0 }}
               className="w-full h-full p-4 flex flex-col justify-center items-center"
             >
-              <p className="text-center p-4 text-xs lg:text-sm font-sofia">
-                {desc}
-              </p>
+              <p className="text-center p-4 text-xs font-sofia">{desc}</p>
+            </motion.div>
+            <motion.div className="flex w-full justify-center items-center pb-4">
+              <span className="font-sofia font-black tracking-wider text-md text-zinc-800 transition-colors hover:text-zinc-800/80">
+                {name}
+              </span>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+    </div>
+  );
+};
+
+const Footer = () => {
+  return (
+    <div className="w-full h-[320px] flex  flex-col justify-center items-center bg-zinc-800">
+      <div className="flex w-full h-full flex-col justify-end items-center pb-10 text-white font-sofia">
+        <a className="cursor-pointer transition-colors hover:text-white/80">
+          Ryan Henrique
+        </a>
+        <span>2023</span>
+      </div>
     </div>
   );
 };
@@ -917,6 +994,7 @@ export const Interface = () => {
       <SkillSection />
       <ProjectsSection />
       <ContactSection />
+      <Footer />
     </div>
   );
 };

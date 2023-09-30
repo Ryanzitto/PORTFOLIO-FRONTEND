@@ -92,3 +92,98 @@ describe("Skill elements should be rendered", () => {
     expect(lang).toBeInTheDocument();
   });
 });
+
+describe("PROJETCS elements should be in redered", () => {
+  test("projeto should be in the screen", () => {
+    const { getByTestId, getByText } = render(<Interface />);
+    const skillButton = getByText("PROJETOS");
+    fireEvent.click(skillButton);
+    const skills = getByTestId("projetos");
+    expect(skills).toBeInTheDocument();
+  });
+  test("if cards name is in the screen", () => {
+    const { getByText, getByTestId } = render(<Interface />);
+    const skillButton = getByText("PROJETOS");
+    fireEvent.click(skillButton);
+    const card = getByTestId("IDK GAME");
+    fireEvent.mouseEnter(card);
+
+    const projectName = getByTestId("IDK GAME");
+    expect(projectName).toBeInTheDocument();
+  });
+  test("if cards name is in the screen", () => {
+    const { getByText, getByTestId } = render(<Interface />);
+    const skillButton = getByText("PROJETOS");
+    fireEvent.click(skillButton);
+    const card = getByTestId("R-AND-M");
+    fireEvent.mouseEnter(card);
+
+    const projectName = getByTestId("R-AND-M");
+    expect(projectName).toBeInTheDocument();
+  });
+
+  test("if Card1 have the correct link to GITHUB", () => {
+    // Renderize o componente
+    const { getByText, getByTestId } = render(<Interface />); // Certifique-se de que o texto que você procura esteja presente no componente
+    const skillButton = getByText("PROJETOS");
+    fireEvent.click(skillButton);
+    const card = getByTestId("IDK GAME");
+    fireEvent.mouseEnter(card);
+    // Encontre o elemento <a> pelo seu texto ou outra característica única, se disponível
+    const linkElement = getByText("GITHUB"); // Substitua 'Texto do Link' pelo texto real do seu link
+
+    // Verifique se o atributo href do elemento <a> é igual ao link correto
+    expect(linkElement).toHaveAttribute(
+      "href",
+      "https://github.com/Ryanzitto/THREE-IDK"
+    );
+  });
+  test("if Card1 have the correct link to GITHUB", () => {
+    // Renderize o componente
+    const { getByText, getByTestId } = render(<Interface />); // Certifique-se de que o texto que você procura esteja presente no componente
+    const skillButton = getByText("PROJETOS");
+    fireEvent.click(skillButton);
+    const card = getByTestId("IDK GAME");
+    fireEvent.mouseEnter(card);
+    // Encontre o elemento <a> pelo seu texto ou outra característica única, se disponível
+    const linkElement = getByText("VER SITE"); // Substitua 'Texto do Link' pelo texto real do seu link
+
+    // Verifique se o atributo href do elemento <a> é igual ao link correto
+    expect(linkElement).toHaveAttribute(
+      "href",
+      "https://ryanzitto.github.io/THREE-IDK/"
+    );
+  });
+  test("if Card2 have the correct link to GITHUB", () => {
+    // Renderize o componente
+    const { getByText, getByTestId } = render(<Interface />); // Certifique-se de que o texto que você procura esteja presente no componente
+    const skillButton = getByText("PROJETOS");
+    fireEvent.click(skillButton);
+    const card = getByTestId("R-AND-M");
+    fireEvent.mouseEnter(card);
+    // Encontre o elemento <a> pelo seu texto ou outra característica única, se disponível
+    const linkElement = getByText("GITHUB"); // Substitua 'Texto do Link' pelo texto real do seu link
+
+    // Verifique se o atributo href do elemento <a> é igual ao link correto
+    expect(linkElement).toHaveAttribute(
+      "href",
+      "https://github.com/Ryanzitto/Rickandmorty"
+    );
+  });
+  test("if Card1 have the correct link to GITHUB", () => {
+    // Renderize o componente
+    const { getByText, getByTestId } = render(<Interface />); // Certifique-se de que o texto que você procura esteja presente no componente
+    const skillButton = getByText("PROJETOS");
+    fireEvent.click(skillButton);
+    const card = getByTestId("R-AND-M");
+    fireEvent.mouseEnter(card);
+    // Encontre o elemento <a> pelo seu texto ou outra característica única, se disponível
+    const linkElement = getByText("VER SITE"); // Substitua 'Texto do Link' pelo texto real do seu link
+
+    // Verifique se o atributo href do elemento <a> é igual ao link correto
+    expect(linkElement).toHaveAttribute(
+      "href",
+      "https://rickandmorty-7gm6b9xrx-ryanzitto.vercel.app/"
+    );
+  });
+});
