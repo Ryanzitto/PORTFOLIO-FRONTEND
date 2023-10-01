@@ -519,8 +519,11 @@ const ContactSection = () => {
   const [hovered, setHovered] = useState<boolean>(false);
 
   const [likeIsClicked, setLikeIsClicked] = useState<boolean>(false);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [name, setName] = useState<string | null>(null);
+
   const like = () => {
-    setLikeIsClicked(!likeIsClicked);
+    setModalIsOpen(true);
   };
 
   useEffect(() => {
@@ -797,7 +800,7 @@ const ContactSection = () => {
             link="https://github.com/Ryanzitto"
           />
 
-          <div className="mt-10 flex gap-2 justify-center items-center">
+          <div className="mt-10 flex gap-2 justify-center items-center relative">
             <p className="font-sofia font-bold text-zinc-800 text-xl ">
               829 LIKES
             </p>
@@ -806,10 +809,46 @@ const ContactSection = () => {
               className="w-6 h-6 cursor-pointer"
               src={
                 likeIsClicked
-                  ? "images/coracao.png"
-                  : "images/coracao-cheio.png"
+                  ? "images/coracao-cheio.png"
+                  : "images/coracao.png"
               }
             />
+            <AnimatePresence>
+              {modalIsOpen && (
+                <motion.div
+                  onChange={(e) => setName(e.target.value)}
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                  }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: 1,
+                    delay: 0,
+                  }}
+                  onMouseLeave={() => setModalIsOpen(false)}
+                  className="absolute  border rounded-md border-slate-200 w-[300px] h-[100px] bg-white/60 backdrop-blur-sm flex flex-col justify-center items-center gap-4"
+                >
+                  <label className="font-sofia font-black text-zinc-800 transition-colorss hover:text-zinc-800/80">
+                    Qual seu nome?
+                  </label>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      className="border border-slate-400 text-center"
+                    ></input>
+                    <button className="bg-zinc-800 text-white p-2 rounded-sm text-xs fontbold">
+                      <img src="images/seta-direita.png" className="w-4 h-4 " />
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+          <div className="mt-10 flex gap-2 justify-center items-center">
+            <span className="font-sofia text-zinc-300 transition-colors hover:text-zinc-500">
+              Ryan Henrique © 2023
+            </span>
           </div>
         </div>
       </div>
@@ -892,13 +931,35 @@ const ButtonCopy = (props: any) => {
       onClick={() => copy(value)}
     >
       <img src="images/interface.png" className="w-6 h-6" />
-      {click === true && (
-        <div className="absolute w-full flex justify-center items-center ml-40">
-          <div className="border border-zinc-300 bg-white p-2 rounded-sm w-fit text-zinc-800">
-            <span className="font-light">Copiado!</span>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {click === true && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 50,
+              scale: 0.8,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.8,
+            }}
+            transition={{
+              duration: 0.2,
+              delay: 0,
+            }}
+            className="absolute w-full flex justify-center items-center ml-40"
+          >
+            <div className="border border-zinc-300 bg-white p-2 rounded-sm w-fit text-zinc-800">
+              <span className="font-light">Copiado!</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.button>
   );
 };
@@ -910,7 +971,7 @@ export const Card = (props: any) => {
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="w-fit h-fit flex justify-center items-center relative rounded-md pb-[1px]"
+      className="w-fit h-fit flex justify-center items-center relative rounded-md"
       data-testid={name}
     >
       <img
@@ -974,19 +1035,6 @@ export const Card = (props: any) => {
   );
 };
 
-const Footer = () => {
-  return (
-    <div className="w-full h-[320px] flex  flex-col justify-center items-center bg-zinc-800">
-      <div className="flex w-full h-full flex-col justify-end items-center pb-10 text-white font-sofia">
-        <a className="cursor-pointer transition-colors hover:text-white/80">
-          Ryan Henrique
-        </a>
-        <span>2023</span>
-      </div>
-    </div>
-  );
-};
-
 export const Interface = () => {
   return (
     <div className="flex flex-col items-center w-screen">
@@ -994,7 +1042,6 @@ export const Interface = () => {
       <SkillSection />
       <ProjectsSection />
       <ContactSection />
-      <Footer />
     </div>
   );
 };
