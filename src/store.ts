@@ -9,6 +9,8 @@ export const useStoreApp = create(
       skillDisplayed: "Threejs / React Three Fiber",
       contentCard: "about",
       visibility: true,
+      liked: false,
+      setLiked: (payload: boolean) => set({ liked: payload }),
       setVisibility: (payload: boolean) => set({ visibility: payload }),
       setContentCard: (payload: string) => set({ contentCard: payload }),
       setSkillDisplayed: (payload: string) => set({ skillDisplayed: payload }),

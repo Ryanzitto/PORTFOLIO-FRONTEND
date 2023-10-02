@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useStoreApp } from "../store";
+import axios from "axios";
 
 const skills = [
   {
@@ -509,7 +510,7 @@ const ProjectsSection = () => {
 };
 
 const ContactSection = () => {
-  const { color } = useStoreApp();
+  const { color, liked, setLiked } = useStoreApp();
 
   const ref1 = useRef<HTMLHeadingElement | null>(null);
   const ref2 = useRef<HTMLHeadingElement | null>(null);
@@ -517,13 +518,40 @@ const ContactSection = () => {
   const ref4 = useRef<HTMLHeadingElement | null>(null);
 
   const [hovered, setHovered] = useState<boolean>(false);
-
-  const [likeIsClicked, setLikeIsClicked] = useState<boolean>(false);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [name, setName] = useState<string | null>(null);
+  const [likes, setLikes] = useState<number | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
 
   const like = () => {
     setModalIsOpen(true);
+  };
+
+  const cancel = () => {
+    setModalIsOpen(false);
+    setName(null);
+  };
+
+  const confirmaLike = () => {
+    if (name !== null) {
+      setModalIsOpen(false);
+      setName(null);
+      axios
+        .post("http://localhost:3000/api/like", {
+          name: name,
+        })
+        .then(
+          (response) => {
+            console.log(response);
+            setLiked(true);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    } else {
+      setMessage("Digite um nome!");
+    }
   };
 
   useEffect(() => {
@@ -540,6 +568,22 @@ const ContactSection = () => {
       ref4.current.style.color = color;
     }
   }, [color, hovered]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/api/getAll").then(
+      (response) => {
+        console.log(response);
+        setLikes(response.data.length);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, [liked]);
+
+  useEffect(() => {
+    setMessage(null);
+  }, [name]);
 
   const tela = window.innerWidth;
   return (
@@ -802,16 +846,13 @@ const ContactSection = () => {
 
           <div className="mt-10 flex gap-2 justify-center items-center relative">
             <p className="font-sofia font-bold text-zinc-800 text-xl ">
-              829 LIKES
+              {likes} LIKES
             </p>
+
             <img
-              onClick={like}
-              className="w-6 h-6 cursor-pointer"
-              src={
-                likeIsClicked
-                  ? "images/coracao-cheio.png"
-                  : "images/coracao.png"
-              }
+              onClick={liked === false ? like : null}
+              className={`w-6 h-6 ${liked === false ? "cursor-pointer" : null}`}
+              src={liked ? "images/coracao-cheio.png" : "images/coracao.png"}
             />
             <AnimatePresence>
               {modalIsOpen && (
@@ -826,8 +867,8 @@ const ContactSection = () => {
                     duration: 1,
                     delay: 0,
                   }}
-                  onMouseLeave={() => setModalIsOpen(false)}
-                  className="absolute  border rounded-md border-slate-200 w-[300px] h-[100px] bg-white/60 backdrop-blur-sm flex flex-col justify-center items-center gap-4"
+                  onMouseLeave={cancel}
+                  className="absolute  border rounded-md border-slate-200 p-4 w-[300px] h-fit bg-white/60 backdrop-blur-sm flex flex-col justify-center items-center gap-4"
                 >
                   <label className="font-sofia font-black text-zinc-800 transition-colorss hover:text-zinc-800/80">
                     Qual seu nome?
@@ -836,11 +877,16 @@ const ContactSection = () => {
                     <input
                       type="text"
                       className="border border-slate-400 text-center"
-                    ></input>
-                    <button className="bg-zinc-800 text-white p-2 rounded-sm text-xs fontbold">
-                      <img src="images/seta-direita.png" className="w-4 h-4 " />
+                    />
+                    <button className="bg-zinc-800 text-white p-2 rounded-sm flex">
+                      <img
+                        onClick={confirmaLike}
+                        src="images/seta-direita.png"
+                        className="w-4 h-4 transition-all hover:opacity-80"
+                      />
                     </button>
                   </div>
+                  <span className="pb-2 text-xs">{message}</span>
                 </motion.div>
               )}
             </AnimatePresence>
