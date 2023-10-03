@@ -11,7 +11,7 @@ Link do deploy: [PORTFOLIO](https://ryanzitto.github.io/)
 
 ## ALGUMAS IMAGENS DO PORTFLIO
 
-![image](/public/PORTFOLIO-IMAGE-1.png)
-![image](/public/PORTFOLIO-IMAGE-2.png)
-![image](/public/PORTFOLIO-IMAGE-3.png)
-![image](/public/PORTFOLIO-IMAGE-4.png)
+![image](/public/images/PORTFOLIO-IMAGE-1.png)
+![image](/public/images/PORTFOLIO-IMAGE-2.png)
+![image](/public/images/PORTFOLIO-IMAGE-3.png)
+![image](/public/images/PORTFOLIO-IMAGE-4.png)
