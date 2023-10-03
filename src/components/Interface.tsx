@@ -1,7 +1,21 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { useStoreApp } from "../store";
 import axios from "axios";
+
+interface CardProps {
+  linkGithub: string;
+  linkDeploy: string;
+  desc: string;
+  url: string;
+  name: string;
+}
+
+interface ButtonProps {
+  text: string;
+  url: string;
+  link?: string;
+}
 
 const skills = [
   {
@@ -62,7 +76,7 @@ const projetos = [
   },
 ];
 
-const Section = (props: any) => {
+const Section = (props: { children: ReactNode }) => {
   const { children } = props;
 
   return (
@@ -87,7 +101,7 @@ const Section = (props: any) => {
 };
 
 const AboutSection = () => {
-  const { color }: any = useStoreApp();
+  const { color } = useStoreApp();
 
   const colorRef = useRef<HTMLDivElement | null>(null);
 
@@ -270,7 +284,7 @@ const AboutSection = () => {
 };
 
 const SkillSection = () => {
-  const { color, skillDisplayed, setSkillDisplayed }: any = useStoreApp();
+  const { color, skillDisplayed, setSkillDisplayed } = useStoreApp();
   const colorRefsSkills = skills.map(() => useRef<HTMLDivElement | null>(null));
   const colorRefsLangs = languages.map(() =>
     useRef<HTMLDivElement | null>(null)
@@ -521,10 +535,12 @@ const ContactSection = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [name, setName] = useState<string | null>(null);
   const [likes, setLikes] = useState<number | null>(null);
-  const [message, setMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [message, setMessage] = useState<boolean>(false);
 
-  const like = () => {
+  const like = (): void => {
     setModalIsOpen(true);
+    setName(null);
   };
 
   const cancel = () => {
@@ -535,23 +551,35 @@ const ContactSection = () => {
   const confirmaLike = () => {
     if (name !== null) {
       setModalIsOpen(false);
-      setName(null);
       axios
-        .post("http://localhost:3000/api/like", {
+        .post("https://portfolio-backend-h1cl.onrender.com/api/like", {
           name: name,
         })
         .then(
           (response) => {
             console.log(response);
             setLiked(true);
+            showThanks();
           },
           (error) => {
             console.log(error);
           }
         );
     } else {
-      setMessage("Digite um nome!");
+      setErrorMessage("Digite um nome!");
     }
+  };
+
+  const showThanks = () => {
+    setMessage(true);
+
+    const timeOut = setTimeout(() => {
+      setMessage(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
   };
 
   useEffect(() => {
@@ -570,7 +598,7 @@ const ContactSection = () => {
   }, [color, hovered]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/getAll").then(
+    axios.get("https://portfolio-backend-h1cl.onrender.com/api/getAll").then(
       (response) => {
         console.log(response);
         setLikes(response.data.length);
@@ -582,7 +610,7 @@ const ContactSection = () => {
   }, [liked]);
 
   useEffect(() => {
-    setMessage(null);
+    setErrorMessage(null);
   }, [name]);
 
   const tela = window.innerWidth;
@@ -850,14 +878,21 @@ const ContactSection = () => {
             </p>
 
             <img
-              onClick={liked === false ? like : null}
+              onClick={() => {
+                if (liked === false) {
+                  like();
+                }
+              }}
               className={`w-6 h-6 ${liked === false ? "cursor-pointer" : null}`}
               src={liked ? "images/coracao-cheio.png" : "images/coracao.png"}
             />
+
             <AnimatePresence>
               {modalIsOpen && (
                 <motion.div
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) =>
+                    setName((e.target as HTMLInputElement).value)
+                  }
                   initial={{ opacity: 0 }}
                   animate={{
                     opacity: 1,
@@ -886,11 +921,29 @@ const ContactSection = () => {
                       />
                     </button>
                   </div>
-                  <span className="pb-2 text-xs">{message}</span>
+                  <span className="pb-2 text-xs">{errorMessage}</span>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
+          <AnimatePresence>
+            {message && (
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 0,
+                }}
+                className="text-zinc-800 font-sofia font-bold"
+              >
+                Obrigado pelo like {name}!
+              </motion.span>
+            )}
+          </AnimatePresence>
           <div className="mt-10 flex gap-2 justify-center items-center">
             <span className="font-sofia text-zinc-300 transition-colors hover:text-zinc-500">
               Ryan Henrique © 2023
@@ -902,7 +955,7 @@ const ContactSection = () => {
   );
 };
 
-const Button = (props: any) => {
+const Button = (props: ButtonProps) => {
   const { color } = useStoreApp();
 
   const ref = useRef<HTMLButtonElement | null>(null);
@@ -936,7 +989,8 @@ const Button = (props: any) => {
     </motion.button>
   );
 };
-const ButtonCopy = (props: any) => {
+
+const ButtonCopy = (props: { value: string }) => {
   const { color } = useStoreApp();
 
   const ref = useRef<HTMLButtonElement | null>(null);
@@ -1010,7 +1064,7 @@ const ButtonCopy = (props: any) => {
   );
 };
 
-export const Card = (props: any) => {
+export const Card = (props: CardProps) => {
   const { linkGithub, linkDeploy, desc, url, name } = props;
   const [hovered, setHovered] = useState<boolean>(false);
   return (

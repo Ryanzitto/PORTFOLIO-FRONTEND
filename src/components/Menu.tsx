@@ -2,7 +2,13 @@ import { useRef, useEffect } from "react";
 
 import { useStoreApp } from "../store";
 
-export const Menu = (props: any) => {
+interface MenuProps {
+  onSectionChange: (value: number) => void;
+  menuOpened: boolean;
+  setMenuOpened: (value: boolean) => void;
+}
+
+export const Menu = (props: MenuProps) => {
   const ref = useRef<HTMLButtonElement | null>(null);
   const ref2 = useRef<HTMLButtonElement | null>(null);
   const { color, setColor, visibility, setVisibility } = useStoreApp();
@@ -75,7 +81,7 @@ export const Menu = (props: any) => {
   );
 };
 
-const MenuButton = (props: any) => {
+const MenuButton = (props: { label: string; onClick: () => void }) => {
   const { label, onClick } = props;
   return (
     <button

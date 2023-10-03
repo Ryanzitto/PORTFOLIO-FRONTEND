@@ -3,7 +3,12 @@ import { useFrame } from "@react-three/fiber";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 
-export const ScrollManager = (props) => {
+interface ScrollProps {
+  section: number;
+  onSectionChange: (value: number) => void;
+}
+
+export const ScrollManager = (props: ScrollProps) => {
   const { section, onSectionChange } = props;
 
   const data = useScroll();

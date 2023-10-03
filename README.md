@@ -1,4 +1,17 @@
-![Thumbnail video tutorial](https://github.com/wass08/r3f-portfolio-scroll-animations/assets/6551176/3afa55c2-5176-431c-8813-46fcf98f3aa6)
+# PORTFOLIO
 
-[Video tutorial](https://youtu.be/0e0J0mmvr1k)
+Este projeto trata-se do meu PORTFOLIO,
+e nele eu mostro minhas habilidades técnicas relacionadas
+ao desenvolvimento de aplicações web.
 
+Deixe a aplicação mais agradável para você escolhendo uma cor predominante!
+e se possível, deixa um like na section de contato como forma de feedback positivo. 😀
+
+Link do deploy: [PORTFOLIO](https://ryanzitto.github.io/)
+
+## ALGUMAS IMAGENS DO PORTFLIO
+
+![image](/public/PORTFOLIO-IMAGE-1.png)
+![image](/public/PORTFOLIO-IMAGE-2.png)
+![image](/public/PORTFOLIO-IMAGE-3.png)
+![image](/public/PORTFOLIO-IMAGE-4.png)

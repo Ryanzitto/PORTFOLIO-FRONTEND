@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { useStoreApp } from "../store";
 
@@ -15,18 +14,18 @@ export const Cursor = () => {
   const [hoverButton, setHoverButton] = useState(false);
 
   const animate = () => {
-    let distX = mouseX - outlineX;
-    let distY = mouseY - outlineY;
+    if (cursorOutline.current) {
+      let distX = mouseX - outlineX;
+      let distY = mouseY - outlineY;
 
-    outlineX = outlineX + distX * CURSOR_SPEED;
-    outlineY = outlineY + distY * CURSOR_SPEED;
+      outlineX = outlineX + distX * CURSOR_SPEED;
+      outlineY = outlineY + distY * CURSOR_SPEED;
 
-    //@ts-ignore
-    cursorOutline.current.style.left = `${outlineX}px`;
+      cursorOutline.current.style.left = `${outlineX}px`;
 
-    //@ts-ignore
-    cursorOutline.current.style.top = `${outlineY}px`;
-    requestAnimationFrame(animate);
+      cursorOutline.current.style.top = `${outlineY}px`;
+      requestAnimationFrame(animate);
+    }
   };
 
   useEffect(() => {
@@ -52,12 +51,8 @@ export const Cursor = () => {
         if (
           //@ts-ignore
           e.target.tagName.toLowerCase() === "button" ||
-          // check parent is button
-
           //@ts-ignore
           e.target.parentElement.tagName.toLowerCase() === "button" ||
-          // check is input or textarea
-
           //@ts-ignore
           e.target.tagName.toLowerCase() === "input" ||
           //@ts-ignore
@@ -89,7 +84,6 @@ export const Cursor = () => {
             ? "bg-transparent border-2 border-indigo-900 w-5 h-5"
             : "bg-indigo-500 w-3 h-3"
         }`}
-        //@ts-ignore
         ref={cursorOutline}
       ></div>
     </>

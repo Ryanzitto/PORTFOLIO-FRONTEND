@@ -6,16 +6,15 @@ import { framerMotionConfig } from "../config";
 import { Avatar } from "./Avatar";
 import { ContactShadows } from "@react-three/drei";
 import { useStoreApp } from "../store";
-export const Experience = (props: any) => {
+
+export const Experience = (props: { section: number; menuOpened: boolean }) => {
   const { visibility } = useStoreApp();
   const { section, menuOpened } = props;
   const { viewport } = useThree();
 
-  //@ts-ignore
-  const cameraPositionX = useMotionValue();
+  const cameraPositionX = useMotionValue(0);
 
-  //@ts-ignore
-  const cameraLookAtX = useMotionValue();
+  const cameraLookAtX = useMotionValue(0);
 
   useEffect(() => {
     //@ts-ignore
@@ -30,10 +29,8 @@ export const Experience = (props: any) => {
   }, [menuOpened]);
 
   useFrame((state) => {
-    //@ts-ignore
     state.camera.position.x = cameraPositionX.get();
 
-    //@ts-ignore
     state.camera.lookAt(cameraLookAtX.get(), 0, 0);
   });
 
