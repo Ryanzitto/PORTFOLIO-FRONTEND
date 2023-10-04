@@ -617,7 +617,7 @@ const ContactSection = () => {
   return (
     <Section>
       <div className="flex flex-col-reverse lg:flex-row w-full h-screen">
-        <div className="w-full h-1/2 lg:w-1/2 lg:h-full flex justify-center items-end relative">
+        {/* <div className="w-full h-1/2 lg:w-1/2 lg:h-full flex justify-center items-end relative">
           <motion.img
             initial={{
               opacity: 0,
@@ -841,8 +841,8 @@ const ContactSection = () => {
               )}
             </AnimatePresence>
           </div>
-        </div>
-        <div className="w-full h-1/2 lg:w-1/2 lg:h-full flex flex-col p-8 flex justify-center items-center gap-3">
+        </div> */}
+        <div className="w-full h-full lg:full lg:h-full flex flex-col p-8 flex justify-center items-center gap-3">
           <p className="font-sofia font-bold text-zinc-800 text-xl mt-10">
             Deseja em entrar em contato comigo?
           </p>
@@ -854,8 +854,8 @@ const ContactSection = () => {
             <ButtonCopy value={"ryanhardflip@gmail.com"} />
           </div>
           <div className="flex gap-4">
-            <Button text={"(31) 9 8109-8735"} url={"images/whatsapp.png"} />
-            <ButtonCopy value={"(31) 9 8109-8735"} />
+            <Button text={"(31) 9 8109-4735"} url={"images/whatsapp.png"} />
+            <ButtonCopy value={"(31) 9 8109-4735"} />
           </div>
 
           <p className="font-sofia font-bold text-zinc-800 text-xl mt-10">
@@ -1065,8 +1065,29 @@ const ButtonCopy = (props: { value: string }) => {
 };
 
 export const Card = (props: CardProps) => {
+  const { color } = useStoreApp();
+  const refButtonGithub = useRef<HTMLButtonElement | null>(null);
+  const refButtonSite = useRef<HTMLButtonElement | null>(null);
   const { linkGithub, linkDeploy, desc, url, name } = props;
   const [hovered, setHovered] = useState<boolean>(false);
+  const [buttonGithubHovered, setButtonGithubHovered] =
+    useState<boolean>(false);
+  const [buttonSiteHovered, setButtonSiteHovered] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (buttonGithubHovered === true && refButtonGithub.current) {
+      refButtonGithub.current.style.backgroundColor = color;
+    }
+    if (buttonGithubHovered === false && refButtonGithub.current) {
+      refButtonGithub.current.style.backgroundColor = "#1b1b1b";
+    }
+    if (buttonSiteHovered === true && refButtonSite.current) {
+      refButtonSite.current.style.backgroundColor = color;
+    }
+    if (buttonSiteHovered === false && refButtonSite.current) {
+      refButtonSite.current.style.backgroundColor = "#1b1b1b";
+    }
+  }, [buttonGithubHovered, buttonSiteHovered]);
   return (
     <div
       onMouseEnter={() => setHovered(true)}
@@ -1091,22 +1112,28 @@ export const Card = (props: CardProps) => {
           >
             <div className="w-full h-fit flex flex justify-center mt-8 gap-2">
               <motion.button
+                onMouseLeave={() => setButtonGithubHovered(false)}
+                onMouseEnter={() => setButtonGithubHovered(true)}
+                ref={refButtonGithub}
                 whileHover={{
                   y: -5,
                   transition: { duration: 0.1 },
                 }}
-                className="bg-zinc-800 font-bold p-2 text-white rounded-md flex justify-center items-center text-xs tracking-wider"
+                className="transition-colors bg-zinc-800 font-bold p-2 text-white rounded-md flex justify-center items-center text-xs tracking-wider"
               >
                 <a href={linkGithub} target="_blank">
                   GITHUB
                 </a>
               </motion.button>
               <motion.button
+                onMouseLeave={() => setButtonSiteHovered(false)}
+                onMouseEnter={() => setButtonSiteHovered(true)}
+                ref={refButtonSite}
                 whileHover={{
                   y: -5,
                   transition: { duration: 0.1 },
                 }}
-                className="bg-zinc-800 font-bold p-2 text-white rounded-md flex justify-center items-center text-xs tracking-wider"
+                className="transition-colors bg-zinc-800 font-bold p-2 text-white rounded-md flex justify-center items-center text-xs tracking-wider"
               >
                 <a href={linkDeploy} target="_blank">
                   VER SITE

@@ -7,7 +7,7 @@ ao desenvolvimento de aplicações web.
 Deixe a aplicação mais agradável para você escolhendo uma cor predominante!
 e se possível, deixa um like na section de contato como forma de feedback positivo. 😀
 
-Link do deploy: [PORTFOLIO](https://ryanzitto.github.io/)
+Link do deploy: [PORTFOLIO](https://ryanzitto.github.io/PORTFOLIO-FRONTEND/)
 
 ## ALGUMAS IMAGENS DO PORTFLIO
 
