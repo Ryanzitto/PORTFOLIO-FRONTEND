@@ -62,7 +62,7 @@ export const Menu = (props: MenuProps) => {
           <MenuButton label="HOME" onClick={() => onSectionChange(0)} />
           <MenuButton label="HABILIDADES" onClick={() => onSectionChange(1)} />
           <MenuButton label="PROJETOS" onClick={() => onSectionChange(2)} />
-          <MenuButton label="CONTATO" onClick={() => onSectionChange(3)} />
+          <MenuButton label="PORRA" onClick={() => onSectionChange(3)} />
           <div className="flex flex-col w-full justify-start items-center">
             <span className="text-sm font-bold text-zinc-800/80 hover:opacity-60">
               COR PRIMÁRIA:

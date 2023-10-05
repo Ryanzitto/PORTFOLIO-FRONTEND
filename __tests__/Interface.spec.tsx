@@ -43,6 +43,7 @@ describe("Home elements should be rendered", () => {
 
 describe("Testing interactions on Menu elements", () => {
   test("If the input color value is equal to color value in zustand when page is loaded", () => {
+    //@ts-ignore
     const { getByTestId } = render(<Menu />);
     //@ts-ignore
     const color = useStoreApp.getState().color;
@@ -53,6 +54,7 @@ describe("Testing interactions on Menu elements", () => {
   });
 
   test("User handle change the color", () => {
+    //@ts-ignore
     const { getByTestId } = render(<Menu />);
     const input = getByTestId("input-color");
 
@@ -86,6 +88,7 @@ describe("Skill elements should be rendered", () => {
     const skills = getByTestId("HABILIDADES");
     expect(skills).toBeInTheDocument();
   });
+
   test("LÍNGUAS should be in the screen", () => {
     const { getByText } = render(<Interface />);
     const lang = getByText("LÍNGUAS");
@@ -93,7 +96,7 @@ describe("Skill elements should be rendered", () => {
   });
 });
 
-describe("PROJETCS elements should be in redered", () => {
+describe("PROJETCS elements should be redered", () => {
   test("projeto should be in the screen", () => {
     const { getByTestId, getByText } = render(<Interface />);
     const skillButton = getByText("PROJETOS");
@@ -123,16 +126,12 @@ describe("PROJETCS elements should be in redered", () => {
   });
 
   test("if Card1 have the correct link to GITHUB", () => {
-    // Renderize o componente
-    const { getByText, getByTestId } = render(<Interface />); // Certifique-se de que o texto que você procura esteja presente no componente
+    const { getByText, getByTestId } = render(<Interface />);
     const skillButton = getByText("PROJETOS");
     fireEvent.click(skillButton);
     const card = getByTestId("IDK GAME");
     fireEvent.mouseEnter(card);
-    // Encontre o elemento <a> pelo seu texto ou outra característica única, se disponível
-    const linkElement = getByText("GITHUB"); // Substitua 'Texto do Link' pelo texto real do seu link
-
-    // Verifique se o atributo href do elemento <a> é igual ao link correto
+    const linkElement = getByText("GITHUB");
     expect(linkElement).toHaveAttribute(
       "href",
       "https://github.com/Ryanzitto/THREE-IDK"
@@ -185,5 +184,54 @@ describe("PROJETCS elements should be in redered", () => {
       "href",
       "https://rickandmorty-7gm6b9xrx-ryanzitto.vercel.app/"
     );
+  });
+});
+
+describe("CONTACT elements should be rendered ", () => {
+  test("Contact title should be in the screen", () => {
+    const { getByText } = render(<Interface />);
+    const title = getByText("Deseja em entrar em contato comigo?");
+    expect(title).toBeInTheDocument();
+  });
+
+  test("Email should be in the screen", () => {
+    const { getByText } = render(<Interface />);
+    const email = getByText("ryanhardflip@gmail.com");
+    expect(email).toBeInTheDocument();
+  });
+
+  test("Phone number should be in the screen", () => {
+    const { getByText } = render(<Interface />);
+    const phoneNumber = getByText("(31) 9 8109-4735");
+    expect(phoneNumber).toBeInTheDocument();
+  });
+
+  test("Linkedin button should be in the screen", () => {
+    const { getByText } = render(<Interface />);
+    const linkedinButton = getByText("VER MEU LINKEDIN");
+    expect(linkedinButton).toBeInTheDocument();
+  });
+
+  test("Github button should be in the screen", () => {
+    const { getByText } = render(<Interface />);
+    const githubButton = getByText("VER MEU GITHUB");
+    expect(githubButton).toBeInTheDocument();
+  });
+});
+
+describe("Testing interaction on contact elements", () => {
+  test("if linkedin button have the correct atributes", () => {
+    const { getByText } = render(<Interface />);
+    const link = getByText("VER MEU LINKEDIN");
+    expect(link).toHaveAttribute(
+      "href",
+      "https://www.linkedin.com/in/ryan-henrique-1b4075233/"
+    );
+  });
+
+  test("if github button have the correct atributes", () => {
+    const { getByText } = render(<Interface />);
+    const link = getByText("VER MEU GITHUB");
+    expect(link).toHaveAttribute("href", "https://github.com/Ryanzitto");
   });
 });
