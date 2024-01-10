@@ -4,8 +4,10 @@ export default {
   theme: {
     extend: {},
     fontFamily: {
-      'sofia': ['Sofia Sans', 'sans-serif'],
-    }
+      sofia: ["Sofia Sans", "sans-serif"],
+      Condensed: ["Sofia Sans Extra Condensed"],
+      nunito: ["Nunito Sans"],
+    },
   },
   plugins: [],
 };

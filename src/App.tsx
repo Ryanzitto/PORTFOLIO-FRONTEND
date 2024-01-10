@@ -27,7 +27,7 @@ function App() {
         <div className="w-screen h-screen relative">
           <div className="bg-slate-100 backdrop-blur-sm w-screen h-screen absolute">
             <Canvas shadows camera={{ position: [0, 3, 10], fov: 42 }}>
-              <ScrollControls pages={4} damping={0.1}>
+              <ScrollControls pages={5} damping={0.1}>
                 <ScrollManager section={section} onSectionChange={setSection} />
                 <Scroll>
                   <Experience section={section} menuOpened={menuOpened} />

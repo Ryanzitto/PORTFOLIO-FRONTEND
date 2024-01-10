@@ -100,6 +100,267 @@ const Section = (props: { children: ReactNode }) => {
   );
 };
 
+const FirstPage = () => {
+  const [nameIsHovered, setNameIsHovered] = useState<boolean>(false);
+
+  const { color } = useStoreApp();
+
+  const colorRef = useRef<HTMLDivElement | null>(null);
+
+  const techs = [
+    "REACT",
+    "NEXTJS",
+    "TYPESCRIPT",
+    "R3F",
+    "REDUX",
+    "ZUSTAND",
+    "AXIOS",
+    "TAILWIND",
+    "STYLED-COMPONENTS",
+    "JEST",
+    "RTL",
+  ];
+
+  const colorRefTechs = techs.map(() => useRef<HTMLDivElement | null>(null));
+
+  useEffect(() => {
+    if (colorRef.current) {
+      colorRef.current.style.backgroundImage = `linear-gradient(120deg, ${color}, #1b1b1b)`;
+      colorRef.current.style.webkitBackgroundClip = "text";
+      colorRef.current.style.color = "transparent";
+    }
+    colorRefTechs.forEach((ref) => {
+      if (ref.current) {
+        ref.current.style.color = color;
+      }
+    });
+  }, [color, colorRefTechs]);
+
+  return (
+    <Section>
+      <div className="flex flex-col w-screen h-screen justify-center items-center bg-white relative">
+        <div className="w-full h-full flex justify-end items-start absolute">
+          <div className="w-1/2 h-full flex flex-col justify-center">
+            <AnimatePresence>
+              <motion.span
+                initial={{
+                  x: -200,
+                  opacity: 0,
+                }}
+                animate={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                exit={{
+                  x: -200,
+                  opacity: 0,
+                }}
+                transition={{
+                  duration: 0.2,
+                  delay: 0.8,
+                  type: "spring",
+                  damping: 10,
+                  stiffness: 100,
+                }}
+                className="hidden lg:flex h-[80px] xl:h-[140px] text-[60px] xl:text-[100px] pl-10 xl:pl-0 font-nunito font-black drop-shadow-[10px_10px_15px_rgba(0,0,0,0.055)] text-white"
+              >
+                SOFTWARE
+              </motion.span>
+              <motion.span
+                initial={{
+                  x: -200,
+                  opacity: 0,
+                }}
+                animate={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                exit={{
+                  x: -200,
+                  opacity: 0,
+                }}
+                transition={{
+                  duration: 0.2,
+                  delay: 0.9,
+                  type: "spring",
+                  damping: 10,
+                  stiffness: 100,
+                }}
+                className="hidden lg:flex h-[80px] xl:h-[140px] text-[60px] xl:text-[100px] pl-10 xl:pl-0 font-nunito font-black  drop-shadow-[10px_10px_15px_rgba(0,0,0,0.055)] text-white"
+              >
+                DEVELOP
+              </motion.span>
+              <motion.span
+                initial={{
+                  x: -200,
+                  opacity: 0,
+                }}
+                animate={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                exit={{
+                  x: -200,
+                  opacity: 0,
+                }}
+                transition={{
+                  duration: 0.2,
+                  delay: 1,
+                  type: "spring",
+                  damping: 10,
+                  stiffness: 100,
+                }}
+                className="hidden lg:flex h-[80px] xl:h-[140px] text-[60px] xl:text-[100px] pl-10 xl:pl-0 font-nunito font-black  drop-shadow-[10px_10px_15px_rgba(0,0,0,0.055)] text-white"
+              >
+                MENT
+              </motion.span>
+            </AnimatePresence>
+          </div>
+        </div>
+        {/* <div className="w-full h-full flex justify-end items-start absolute">
+          <div className="w-1/2 h-full flex flex-col justify-center">
+            <AnimatePresence>
+              {nameIsHovered == true ? (
+                <>
+                  <motion.span
+                    initial={{
+                      x: -200,
+                      opacity: 0,
+                    }}
+                    animate={{
+                      x: 0,
+                      opacity: 1,
+                    }}
+                    exit={{
+                      x: -200,
+                      opacity: 0,
+                    }}
+                    transition={{
+                      duration: 0.2,
+                      delay: 0.8,
+                      type: "spring",
+                      damping: 10,
+                      stiffness: 100,
+                    }}
+                    className="hidden lg:flex h-[80px] xl:h-[140px] text-[60px] xl:text-[100px] pl-10 xl:pl-0 font-nunito font-black  drop-shadow-[10px_10px_15px_rgba(0,0,0,0.055)] bg-clip-text text-transparent bg-orange-500"
+                  >
+                    React
+                  </motion.span>
+                  <motion.span
+                    initial={{
+                      x: -200,
+                      opacity: 0,
+                    }}
+                    animate={{
+                      x: 0,
+                      opacity: 1,
+                    }}
+                    exit={{
+                      x: -200,
+                      opacity: 0,
+                    }}
+                    transition={{
+                      duration: 0.2,
+                      delay: 0.9,
+                      type: "spring",
+                      damping: 10,
+                      stiffness: 100,
+                    }}
+                    className="hidden lg:flex h-[80px] xl:h-[140px] text-[60px] xl:text-[100px] pl-10 xl:pl-0 font-nunito font-black  drop-shadow-[10px_10px_15px_rgba(0,0,0,0.055)] bg-clip-text text-transparent bg-orange-500"
+                  >
+                    NodeJS
+                  </motion.span>
+                </>
+              ) : null}
+            </AnimatePresence>
+          </div>
+        </div> */}
+        <div className="z-20 w-full h-full flex justify-end items-start absolute">
+          <div className="w-1/2 h-full flex justify-center items-center">
+            <AnimatePresence>
+              {nameIsHovered && (
+                <motion.img
+                  initial={{
+                    opacity: 0,
+                    y: 50,
+                    scale: 0.95,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.95,
+                  }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.5,
+                  }}
+                  className="w-[500px] hidden lg:flex "
+                  src="images/image_example.png"
+                />
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+        <header className="z-10 h-fit w-full">
+          <div className="h-full w-full flex justify-start p-8 xl:pl-20 2xl:pl-48 h items-center w-1/2 gap-2">
+            <div className="w-full flex flex-col text-xl">
+              <span className="font-extrabold text-zinc-800 text-xl md:text-normal">
+                Ryan Henrique
+              </span>
+              <span className="tracking-widest text-zinc-800 font-normal text-lg md:text-sm">
+                Web Developer
+              </span>
+            </div>
+          </div>
+        </header>
+        <main className="z-30 p-4 md:p-8 xl:pl-20 2xl:pl-48 h-fit w-full flex flex-col">
+          <span
+            onMouseEnter={() => setNameIsHovered(true)}
+            onMouseLeave={() => setNameIsHovered(false)}
+            className="tracking-[3px] text-zinc-400 font-light font-nunito w-fit"
+          >
+            RYAN HENRIQUE
+          </span>
+          <div className="flex flex-col gap-2 pt-4">
+            <span className="text-7xl sm:text-8xl text-zinc-800 font-nunito font-black">
+              Full Stack
+            </span>
+            <div className="flex h-fit items-end">
+              <span className="text-7xl sm:text-8xl text-zinc-800 font-nunito font-black">
+                Developer
+              </span>
+              <div className="mb-[5px] rounded-full w-4 h-4 flex bg-orange-500"></div>
+            </div>
+            <p className="font-nunito font-bold text-zinc-400 w-[380px] md:w-[600px] text-lg pt-4">
+              Over the last two years I have dedicated myself to learning
+              programming and developing my skills as a fullStack developer
+              <br />
+              with a focus on frontend.
+            </p>
+          </div>
+          <div className="flex h-fit w-full items-end gap-4 pt-10 md:pt-8">
+            <span className="cursor-pointer text-md md:text-xl text-zinc-800 font-nunito font-bold  duration-[1500ms] hover:underline hover:opacity-50">
+              View Projects
+            </span>
+            <div className="h-6 w-[0.5px] bg-zinc-800"></div>
+            <span className="cursor-pointer text-md md:text-xl text-zinc-800 font-nunito font-bold  duration-[1500ms] hover:underline hover:opacity-50">
+              About Me
+            </span>
+            <div className="h-6 w-[0.5px] bg-zinc-800"></div>
+            <span className="cursor-pointer text-md md:text-xl text-zinc-800 font-nunito font-bold  duration-[1500ms] hover:underline hover:opacity-50">
+              Contact
+            </span>
+          </div>
+        </main>
+      </div>
+    </Section>
+  );
+};
+
 const AboutSection = () => {
   const { color } = useStoreApp();
 
@@ -399,7 +660,7 @@ const SkillSection = () => {
                             scale: 0.8,
                           }}
                           transition={{
-                            duration: 0.2,
+                            duration: 1,
                             delay: 0,
                           }}
                           className="p-4 w-full bg-zinc-700 backdrop-blur-sm mt-4 rounded-md border border-slate-600"
@@ -483,17 +744,6 @@ const SkillSection = () => {
 };
 
 const ProjectsSection = () => {
-  const { color } = useStoreApp();
-  const ref = useRef<HTMLSpanElement | null>(null);
-  const [hovered, setHovered] = useState<boolean>(false);
-  useEffect(() => {
-    if (ref.current && hovered === true) {
-      ref.current.style.color = color;
-    }
-    if (ref.current && hovered === false) {
-      ref.current.style.color = "#1b1b1b";
-    }
-  }, [color, hovered]);
   return (
     <Section>
       <motion.div
@@ -510,15 +760,12 @@ const ProjectsSection = () => {
             },
           },
         }}
-        className="flex flex-col w-full h-full justify-center items-center"
+        className="bg-zinc-800 flex flex-col w-full h-full justify-center items-center"
       >
-        <div className="w-full h-16 flex justify-center items-center text-zinc-800 text-2xl font-black font-sofia">
+        <div className="w-full h-28 flex justify-center items-center font-black font-sofia">
           <span
-            onMouseLeave={() => setHovered(false)}
-            onMouseEnter={() => setHovered(true)}
-            ref={ref}
             data-testid="projetos"
-            className="transition-colors duration-[500ms]"
+            className="text-5xl transition-colors duration-[500ms] text-white tracking-wider"
           >
             PROJETOS
           </span>
@@ -632,7 +879,7 @@ const ContactSection = () => {
 
   return (
     <Section>
-      <div className="flex flex-col-reverse lg:flex-row w-full h-screen">
+      <div className="bg-zinc-800 flex flex-col-reverse lg:flex-row w-full h-screen border-t border-white/60">
         <div className="w-full h-full lg:full lg:h-full flex flex-col p-8 flex justify-center items-center gap-3">
           <p className="font-sofia font-bold text-zinc-800 text-xl mt-10">
             Deseja em entrar em contato comigo?
@@ -886,69 +1133,71 @@ export const Card = (props: CardProps) => {
       className="w-fit h-fit flex justify-center items-center relative rounded-md"
       data-testid={name}
     >
-      <img
-        src={url}
-        className={`w-[300px] lg:w-[400px] ${
-          hovered ? "opacity-80" : null
-        } rounded-md`}
-      />
+      <div className="w-[400px] h-[90%] bg-white flex rounded-md ">
+        <div className="w-fit h-fit flex justify-center items-center relative rounded-md flex pt-8">
+          <img
+            src={url}
+            className={` w-[90%] ${hovered ? "opacity-80" : null} rounded-md`}
+          />
 
-      <AnimatePresence>
-        {hovered === true && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="bg-white/60 backdrop-blur-sm absolute w-full h-full flex flex-col justify-center rounded-md items-center"
-          >
-            <div className="w-full h-fit flex flex justify-center mt-8 gap-2">
-              <motion.button
-                onMouseLeave={() => setButtonGithubHovered(false)}
-                onMouseEnter={() => setButtonGithubHovered(true)}
-                ref={refButtonGithub}
-                whileHover={{
-                  y: -5,
-                  transition: { duration: 0.1 },
-                }}
-                className="transition-colors duration-[500ms] bg-zinc-800 font-bold p-2 text-white rounded-md flex justify-center items-center text-xs tracking-wider"
+          <AnimatePresence>
+            {hovered === true && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="bg-white/60 backdrop-blur-sm absolute w-full h-full flex flex-col justify-center rounded-md items-center"
               >
-                <a href={linkGithub} target="_blank">
-                  GITHUB
-                </a>
-              </motion.button>
-              <motion.button
-                onMouseLeave={() => setButtonSiteHovered(false)}
-                onMouseEnter={() => setButtonSiteHovered(true)}
-                ref={refButtonSite}
-                whileHover={{
-                  y: -5,
-                  transition: { duration: 0.1 },
-                }}
-                className="transition-colors duration-[500ms] bg-zinc-800 font-bold p-2 text-white rounded-md flex justify-center items-center text-xs tracking-wider"
-              >
-                <a href={linkDeploy} target="_blank">
-                  VER SITE
-                </a>
-              </motion.button>
-            </div>
+                <div className="w-full h-fit flex flex justify-center mt-8 gap-2">
+                  <motion.button
+                    onMouseLeave={() => setButtonGithubHovered(false)}
+                    onMouseEnter={() => setButtonGithubHovered(true)}
+                    ref={refButtonGithub}
+                    whileHover={{
+                      y: -5,
+                      transition: { duration: 0.1 },
+                    }}
+                    className="transition-colors duration-[500ms] bg-zinc-800 font-bold p-2 text-white rounded-md flex justify-center items-center text-xs tracking-wider"
+                  >
+                    <a href={linkGithub} target="_blank">
+                      GITHUB
+                    </a>
+                  </motion.button>
+                  <motion.button
+                    onMouseLeave={() => setButtonSiteHovered(false)}
+                    onMouseEnter={() => setButtonSiteHovered(true)}
+                    ref={refButtonSite}
+                    whileHover={{
+                      y: -5,
+                      transition: { duration: 0.1 },
+                    }}
+                    className="transition-colors duration-[500ms] bg-zinc-800 font-bold p-2 text-white rounded-md flex justify-center items-center text-xs tracking-wider"
+                  >
+                    <a href={linkDeploy} target="_blank">
+                      VER SITE
+                    </a>
+                  </motion.button>
+                </div>
 
-            <motion.div
-              initial={{
-                y: 100,
-              }}
-              animate={{ y: 0 }}
-              className="w-full h-full p-4 flex flex-col justify-center items-center"
-            >
-              <p className="text-center p-4 text-xs font-sofia">{desc}</p>
-            </motion.div>
-            <motion.div className="flex w-full justify-center items-center pb-4">
-              <span className="font-sofia font-black tracking-wider text-md text-zinc-800 transition-colors hover:text-zinc-800/80">
-                {name}
-              </span>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                <motion.div
+                  initial={{
+                    y: 100,
+                  }}
+                  animate={{ y: 0 }}
+                  className="w-full h-full p-4 flex flex-col justify-center items-center"
+                >
+                  <p className="text-center p-4 text-xs font-sofia">{desc}</p>
+                </motion.div>
+                <motion.div className="flex w-full justify-center items-center pb-4">
+                  <span className="font-sofia font-black tracking-wider text-md text-zinc-800 transition-colors hover:text-zinc-800/80">
+                    {name}
+                  </span>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
     </div>
   );
 };
@@ -956,10 +1205,11 @@ export const Card = (props: CardProps) => {
 export const Interface = () => {
   return (
     <div className="flex flex-col items-center w-screen">
+      <FirstPage />
       <AboutSection />
-      <SkillSection />
+      {/* <SkillSection />
       <ProjectsSection />
-      <ContactSection />
+      <ContactSection /> */}
     </div>
   );
 };
