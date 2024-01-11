@@ -138,9 +138,60 @@ const FirstPage = () => {
 
   return (
     <Section>
-      <div className="flex flex-col w-screen h-screen justify-center items-center bg-white relative">
-        <div className="w-full h-full flex justify-end items-start absolute">
-          <div className="w-1/2 h-full flex flex-col justify-center">
+      <div className="flex w-screen h-screen justify-start items-start lg:items-center lg:justify-center pt-20 lg:p-10 bg-white relative p-10 lg:pl-20">
+        <main className="h-fit w-full flex flex-col lg:flex-row justify-center items-center">
+          <div className="flex justify-center items-center h-1/2 w-full lg:w-1/2 lg:h-full">
+            <div className="flex flex-col">
+              {/* <div className="h-full w-full flex justify-start h items-center gap-2 mb-4">
+                <div className="w-full flex flex-col text-xl">
+                  <span className="font-extrabold text-zinc-800 text-xl md:text-normal lg:text-2xl font-nunito">
+                    Ryan Henrique
+                  </span>
+                  <span className="tracking-widest text-zinc-800 font-normal text-lg md:text-sm font-nunito">
+                    Web Developer
+                  </span>
+                </div>
+              </div> */}
+              <span
+                onMouseEnter={() => setNameIsHovered(true)}
+                onMouseLeave={() => setNameIsHovered(false)}
+                className="tracking-[3px] text-zinc-400 font-light font-nunito w-fit"
+              >
+                RYAN HENRIQUE
+              </span>
+              <div className="flex flex-col gap-2 pt-4">
+                <span className="text-5xl sm:text-8xl text-zinc-800 font-nunito font-black">
+                  Full Stack
+                </span>
+                <div className="flex h-fit items-end">
+                  <span className="text-5xl sm:text-8xl text-zinc-800 font-nunito font-black">
+                    Developer
+                  </span>
+                  <div className="mb-[10px] rounded-full w-4 h-4 flex bg-orange-500"></div>
+                </div>
+                <p className="font-nunito font-bold text-zinc-400 w-[300px] sm:w-[380px] md:w-[600px] text-lg md:text-xl pt-4">
+                  Over the last two years I have dedicated myself to learning
+                  programming and developing my skills as a fullStack developer
+                  <br />
+                  with a focus on frontend.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row h-fit w-full items-start gap-4 pt-10 md:pt-8">
+                <span className="cursor-pointer text-md md:text-xl text-zinc-800 font-nunito font-bold  duration-[1500ms] hover:underline hover:opacity-50">
+                  View Projects
+                </span>
+                <div className="hidden sm:flex h-6 w-[0.5px] bg-zinc-800"></div>
+                <span className="cursor-pointer text-md md:text-xl text-zinc-800 font-nunito font-bold  duration-[1500ms] hover:underline hover:opacity-50">
+                  About Me
+                </span>
+                <div className="hidden sm:flex h-6 w-[0.5px] bg-zinc-800"></div>
+                <span className="cursor-pointer text-md md:text-xl text-zinc-800 font-nunito font-bold  duration-[1500ms] hover:underline hover:opacity-50">
+                  Contact
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="hidden xl:flex h-1/2 w-full xl:w-1/2 xl:h-full flex-col justify-center items-start relative">
             <AnimatePresence>
               <motion.span
                 initial={{
@@ -162,7 +213,7 @@ const FirstPage = () => {
                   damping: 10,
                   stiffness: 100,
                 }}
-                className="hidden lg:flex h-[80px] xl:h-[140px] text-[60px] xl:text-[100px] pl-10 xl:pl-0 font-nunito font-black drop-shadow-[10px_10px_15px_rgba(0,0,0,0.055)] text-white"
+                className="hidden lg:flex h-[80px] xl:h-[140px] text-[60px] xl:text-[120px] font-nunito font-black drop-shadow-[10px_5px_15px_rgba(0,0,0,0.045)] text-white"
               >
                 SOFTWARE
               </motion.span>
@@ -186,7 +237,7 @@ const FirstPage = () => {
                   damping: 10,
                   stiffness: 100,
                 }}
-                className="hidden lg:flex h-[80px] xl:h-[140px] text-[60px] xl:text-[100px] pl-10 xl:pl-0 font-nunito font-black  drop-shadow-[10px_10px_15px_rgba(0,0,0,0.055)] text-white"
+                className="hidden lg:flex h-[80px] xl:h-[140px] text-[60px] xl:text-[120px] font-nunito font-black drop-shadow-[10px_5px_15px_rgba(0,0,0,0.045)] text-white"
               >
                 DEVELOP
               </motion.span>
@@ -210,150 +261,39 @@ const FirstPage = () => {
                   damping: 10,
                   stiffness: 100,
                 }}
-                className="hidden lg:flex h-[80px] xl:h-[140px] text-[60px] xl:text-[100px] pl-10 xl:pl-0 font-nunito font-black  drop-shadow-[10px_10px_15px_rgba(0,0,0,0.055)] text-white"
+                className="hidden lg:flex h-[80px] xl:h-[140px] text-[60px] xl:text-[120px] font-nunito font-black drop-shadow-[10px_5px_15px_rgba(0,0,0,0.045)] text-white"
               >
                 MENT
               </motion.span>
             </AnimatePresence>
-          </div>
-        </div>
-        {/* <div className="w-full h-full flex justify-end items-start absolute">
-          <div className="w-1/2 h-full flex flex-col justify-center">
-            <AnimatePresence>
-              {nameIsHovered == true ? (
-                <>
-                  <motion.span
+            <div className="absolute w-full h-full flex justify-end items-center">
+              <AnimatePresence>
+                {nameIsHovered && (
+                  <motion.img
                     initial={{
-                      x: -200,
                       opacity: 0,
+                      y: 50,
+                      scale: 0.95,
                     }}
                     animate={{
-                      x: 0,
                       opacity: 1,
+                      y: 0,
+                      scale: 1,
                     }}
                     exit={{
-                      x: -200,
                       opacity: 0,
+                      scale: 0.95,
                     }}
                     transition={{
-                      duration: 0.2,
-                      delay: 0.8,
-                      type: "spring",
-                      damping: 10,
-                      stiffness: 100,
+                      duration: 1,
+                      delay: 0.5,
                     }}
-                    className="hidden lg:flex h-[80px] xl:h-[140px] text-[60px] xl:text-[100px] pl-10 xl:pl-0 font-nunito font-black  drop-shadow-[10px_10px_15px_rgba(0,0,0,0.055)] bg-clip-text text-transparent bg-orange-500"
-                  >
-                    React
-                  </motion.span>
-                  <motion.span
-                    initial={{
-                      x: -200,
-                      opacity: 0,
-                    }}
-                    animate={{
-                      x: 0,
-                      opacity: 1,
-                    }}
-                    exit={{
-                      x: -200,
-                      opacity: 0,
-                    }}
-                    transition={{
-                      duration: 0.2,
-                      delay: 0.9,
-                      type: "spring",
-                      damping: 10,
-                      stiffness: 100,
-                    }}
-                    className="hidden lg:flex h-[80px] xl:h-[140px] text-[60px] xl:text-[100px] pl-10 xl:pl-0 font-nunito font-black  drop-shadow-[10px_10px_15px_rgba(0,0,0,0.055)] bg-clip-text text-transparent bg-orange-500"
-                  >
-                    NodeJS
-                  </motion.span>
-                </>
-              ) : null}
-            </AnimatePresence>
-          </div>
-        </div> */}
-        <div className="z-20 w-full h-full flex justify-end items-start absolute">
-          <div className="w-1/2 h-full flex justify-center items-center">
-            <AnimatePresence>
-              {nameIsHovered && (
-                <motion.img
-                  initial={{
-                    opacity: 0,
-                    y: 50,
-                    scale: 0.95,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                  }}
-                  exit={{
-                    opacity: 0,
-                    scale: 0.95,
-                  }}
-                  transition={{
-                    duration: 1,
-                    delay: 0.5,
-                  }}
-                  className="w-[500px] hidden lg:flex "
-                  src="images/image_example.png"
-                />
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
-        <header className="z-10 h-fit w-full">
-          <div className="h-full w-full flex justify-start p-8 xl:pl-20 2xl:pl-48 h items-center w-1/2 gap-2">
-            <div className="w-full flex flex-col text-xl">
-              <span className="font-extrabold text-zinc-800 text-xl md:text-normal">
-                Ryan Henrique
-              </span>
-              <span className="tracking-widest text-zinc-800 font-normal text-lg md:text-sm">
-                Web Developer
-              </span>
+                    className="w-[500px] hidden lg:flex z-10"
+                    src="images/image_example.png"
+                  />
+                )}
+              </AnimatePresence>
             </div>
-          </div>
-        </header>
-        <main className="z-30 p-4 md:p-8 xl:pl-20 2xl:pl-48 h-fit w-full flex flex-col">
-          <span
-            onMouseEnter={() => setNameIsHovered(true)}
-            onMouseLeave={() => setNameIsHovered(false)}
-            className="tracking-[3px] text-zinc-400 font-light font-nunito w-fit"
-          >
-            RYAN HENRIQUE
-          </span>
-          <div className="flex flex-col gap-2 pt-4">
-            <span className="text-7xl sm:text-8xl text-zinc-800 font-nunito font-black">
-              Full Stack
-            </span>
-            <div className="flex h-fit items-end">
-              <span className="text-7xl sm:text-8xl text-zinc-800 font-nunito font-black">
-                Developer
-              </span>
-              <div className="mb-[5px] rounded-full w-4 h-4 flex bg-orange-500"></div>
-            </div>
-            <p className="font-nunito font-bold text-zinc-400 w-[380px] md:w-[600px] text-lg pt-4">
-              Over the last two years I have dedicated myself to learning
-              programming and developing my skills as a fullStack developer
-              <br />
-              with a focus on frontend.
-            </p>
-          </div>
-          <div className="flex h-fit w-full items-end gap-4 pt-10 md:pt-8">
-            <span className="cursor-pointer text-md md:text-xl text-zinc-800 font-nunito font-bold  duration-[1500ms] hover:underline hover:opacity-50">
-              View Projects
-            </span>
-            <div className="h-6 w-[0.5px] bg-zinc-800"></div>
-            <span className="cursor-pointer text-md md:text-xl text-zinc-800 font-nunito font-bold  duration-[1500ms] hover:underline hover:opacity-50">
-              About Me
-            </span>
-            <div className="h-6 w-[0.5px] bg-zinc-800"></div>
-            <span className="cursor-pointer text-md md:text-xl text-zinc-800 font-nunito font-bold  duration-[1500ms] hover:underline hover:opacity-50">
-              Contact
-            </span>
           </div>
         </main>
       </div>
