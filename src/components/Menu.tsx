@@ -13,7 +13,7 @@ export const Menu = (props: MenuProps) => {
     <>
       <button
         onClick={() => setMenuOpened(!menuOpened)}
-        className="bg-none z-20 fixed top-12 right-6 lg:right-16 w-10 h-10 rounded-md"
+        className="bg-none z-20 fixed top-12 right-6 lg:right-16 w-8 h-10 rounded-md"
       >
         <div
           className={`bg-zinc-800 h-0.5 rounded-md w-2/3 md:w-full transition-all ${
